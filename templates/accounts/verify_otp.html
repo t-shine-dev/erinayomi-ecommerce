@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Verify Email — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="max-w-md mx-auto px-4 sm:px-6 py-20">
+  <div class="text-center mb-8 reveal">
+    <div class="kicker justify-center mb-3">Security Check</div>
+    <h1 class="font-serif text-3xl">Verify Your Email</h1>
+    <p class="text-sm text-gray-500 mt-2">We’ve sent a 6-digit verification code to your email address. Enter it below to activate your account.</p>
+  </div>
+  
+  <div class="card-surface p-8">
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <label class="field-label" for="otp_code">Enter 6-Digit Code</label>
+        <input type="text" name="otp_code" id="otp_code" required maxlength="6" class="w-full text-center tracking-widest text-2xl py-2" placeholder="123456" autocomplete="one-time-code">
+      </div>
+      <button type="submit" class="btn btn-primary w-full !py-3.5">Verify Email</button>
+    </form>
+  </div>
+  
+  <p class="text-sm text-gray-500 text-center mt-6">
+    Didn't get the code? <a href="{% url 'accounts:register' %}" class="text-gold-dark hover:underline">Register again</a>
+  </p>
+</section>
+{% endblock %}

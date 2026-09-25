@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — {{ store_settings.business_name }}{% endblock %}
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+  <div class="kicker mb-3 text-gold">Staff Only</div>
+  <h1 class="font-serif text-3xl md:text-4xl mb-2 text-white">Business Dashboard</h1>
+  <p class="text-sm text-white/70 mb-10">
+    Full product/order management stays in <a href="/admin/" class="text-gold hover:underline font-medium">Django Admin</a> — this view is for at-a-glance numbers.
+  </p>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+    <div class="card-surface p-5 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <div class="text-xs uppercase tracking-wide font-semibold text-zinc-600 mb-1">Revenue</div>
+      <div class="font-serif text-2xl text-charcoal">₦{{ revenue|floatformat:0 }}</div>
+    </div>
+    <div class="card-surface p-5 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <div class="text-xs uppercase tracking-wide font-semibold text-zinc-600 mb-1">Orders</div>
+      <div class="font-serif text-2xl text-charcoal">{{ orders_count }}</div>
+    </div>
+    <div class="card-surface p-5 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <div class="text-xs uppercase tracking-wide font-semibold text-zinc-600 mb-1">Customers</div>
+      <div class="font-serif text-2xl text-charcoal">{{ customers_count }}</div>
+    </div>
+    <div class="card-surface p-5 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <div class="text-xs uppercase tracking-wide font-semibold text-zinc-600 mb-1">Products</div>
+      <div class="font-serif text-2xl text-charcoal">{{ products_count }}</div>
+    </div>
+    <div class="card-surface p-5 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <div class="text-xs uppercase tracking-wide font-semibold text-zinc-600 mb-1">Low Stock</div>
+      <div class="font-serif text-2xl {% if low_stock %}text-red-600{% else %}text-charcoal{% endif %}">{{ low_stock|length }}</div>
+    </div>
+    <div class="card-surface p-5 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <div class="text-xs uppercase tracking-wide font-semibold text-zinc-600 mb-1">Pending</div>
+      <div class="font-serif text-2xl {% if pending_count %}text-amber-600{% else %}text-charcoal{% endif %}">{{ pending_count }}</div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    <div class="lg:col-span-2 card-surface p-6 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <h2 class="font-serif text-xl mb-6 text-charcoal">Revenue — Last 7 Days</h2>
+      <div class="flex items-end gap-3 h-40">
+        {% for d in daily_revenue %}
+        <div class="flex-1 flex flex-col items-center justify-end h-full gap-2">
+          <div class="w-full bg-soft rounded-t relative" style="height: 100%;">
+            <div class="absolute bottom-0 left-0 right-0 bg-gold rounded-t transition-all" 
+                 style="--bar-height: {{ d.pct|default:0|floatformat:0 }}%; height: var(--bar-height);"></div>
+          </div>
+          <span class="text-[10px] font-medium text-zinc-600">{{ d.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card-surface p-6 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <h2 class="font-serif text-xl mb-4 text-charcoal">Low Stock Alerts</h2>
+      {% if low_stock %}
+      <ul class="space-y-3">
+        {% for p in low_stock %}
+        <li class="flex justify-between text-sm">
+          <span class="truncate text-charcoal font-medium">{{ p.name }}</span>
+          <span class="font-semibold {% if p.stock == 0 %}text-red-600{% else %}text-amber-600{% endif %}">{{ p.stock }} left</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-sm text-zinc-600">All products are well stocked.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="card-surface p-6 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <h2 class="font-serif text-xl mb-4 text-charcoal">Pending Orders</h2>
+      {% if pending_orders %}
+      <div class="divide-y divide-gray-100">
+        {% for o in pending_orders %}
+        <a href="{% url 'orders:order_detail' o.order_number %}" class="flex justify-between py-2.5 text-sm text-charcoal hover:text-gold-dark font-medium">
+          <span>🔔 {{ o.order_number }} — {{ o.full_name }}</span>
+          <span>₦{{ o.total|floatformat:0 }}</span>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-sm text-zinc-600">No pending orders. 🎉</p>
+      {% endif %}
+    </div>
+
+    <div class="card-surface p-6 bg-white border border-gray-200 rounded-sm shadow-sm">
+      <h2 class="font-serif text-xl mb-4 text-charcoal">Recent Orders</h2>
+      <div class="divide-y divide-gray-100">
+        {% for o in recent_orders %}
+        <a href="{% url 'orders:order_detail' o.order_number %}" class="flex items-center justify-between py-2.5 text-sm text-charcoal hover:text-gold-dark font-medium">
+          <span>{{ o.order_number }}</span>
+          <span class="badge {% if o.status == 'paid' %}badge-new{% elif o.status == 'cancelled' %}badge-out{% else %}badge-outline{% endif %}">{{ o.get_status_display }}</span>
+          <span>₦{{ o.total|floatformat:0 }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

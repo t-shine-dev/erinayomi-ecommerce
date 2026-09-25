@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmation — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="max-w-xl mx-auto px-4 sm:px-6 py-24 text-center">
+  {% if order and order.status == "paid" %}
+  <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 reveal-scale in-view">
+    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+  </div>
+  <h1 class="font-serif text-3xl mb-3">Thank you, {{ order.full_name }}!</h1>
+   <p class="text-gray-600 mb-8 !text-gray-300">Your order <span class="font-medium text-charcoal !text-white">{{ order.order_number }}</span> has been placed and paid. A confirmation email was requested.</p>
+  <a href="{% url 'orders:order_detail' order.order_number %}" class="btn btn-primary">View Order</a>
+
+  {% elif order %}
+  <div class="w-16 h-16 mx-auto rounded-full bg-red-50 text-red-600 flex items-center justify-center mb-6">
+    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </div>
+  <h1 class="font-serif text-3xl mb-3">Payment not confirmed</h1>
+  <p class="text-gray-600 mb-8">We couldn't confirm payment for order {{ order.order_number }}. If you were charged, contact us and we'll sort it out.</p>
+  <a href="{% url 'catalog:contact' %}" class="btn btn-outline">Contact Support</a>
+
+  {% else %}
+  <h1 class="font-serif text-3xl mb-3">No order reference found</h1>
+  <p class="text-gray-600">If you just completed a payment, check your email for confirmation, or contact us.</p>
+  {% endif %}
+</section>
+{% endblock %}

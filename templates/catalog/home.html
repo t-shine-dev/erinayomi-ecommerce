@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% block title %}{{ store_settings.business_name|default:"ERINAYOMI" }} — Considered Pieces, Made-to-Measure Style{% endblock %}
+{% block og_title %}{{ store_settings.business_name|default:"ERINAYOMI" }} — Considered Pieces, Made-to-Measure Style{% endblock %}
+{% block content %}
+
+{% with hero_product=featured|first %}
+<!-- 01 / HERO (Exact screen fit, fully cleared below header) -->
+<section class="hero-stage relative min-h-screen lg:h-screen lg:max-h-[900px] overflow-hidden text-white flex items-center pt-28 pb-16 lg:py-0">
+  <div class="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-8 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:px-12">
+    
+    <!-- Left Column: Text -->
+    <div class="lg:col-span-6">
+      <p class="eyebrow reveal text-xs">ERINAYOMI / The edit</p>
+      <h1 class="mt-3 max-w-2xl font-serif text-3xl sm:text-5xl lg:text-7xl leading-[1.05] sm:leading-[0.95] tracking-[-0.03em] reveal">
+        Pieces with<br>
+        <span class="text-gold italic">presence.</span>
+      </h1>
+      <p class="mt-3 max-w-lg text-sm leading-relaxed text-white/65 sm:text-base reveal">
+        Considered jewelry, watches, accessories and made-to-measure style for the way you choose to show up.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3 reveal">
+        <a href="{% url 'catalog:product_list' %}" class="btn btn-gold text-xs py-2.5 px-5">Shop Collection <span aria-hidden="true">↗</span></a>
+        <a href="{% url 'catalog:tailoring' %}" class="btn btn-outline text-xs py-2.5 px-5 !border-white/30 !text-white hover:!border-white hover:!bg-white hover:!text-charcoal">Explore Tailoring</a>
+      </div>
+    </div>
+
+    <!-- Right Column: Image Frame -->
+    <div class="relative lg:col-span-6 reveal-scale mt-5 lg:mt-14">
+      <div class="hero-image-frame rounded-sm relative w-full h-[300px] sm:h-[380px] lg:h-[420px] overflow-hidden shadow-2xl">
+        <img src="/media/products/ring.jpg" alt="ERINAYOMI Luxury Ring" class="absolute inset-0 h-full w-full object-cover object-center" fetchpriority="high">
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute inset-x-6 bottom-4 z-10 flex items-end justify-between gap-4">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-white/50">Featured piece</p>
+            <p class="mt-1 font-serif text-base sm:text-xl">Baguette Diamond Ring</p>
+            <p class="mt-1 text-xs sm:text-sm text-white/65">₦150,000</p>
+          </div>
+          <a href="{% url 'catalog:product_list' %}" aria-label="View collection" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-gold transition hover:bg-gold hover:text-charcoal">↗</a>
+        </div>
+      </div>
+      <div class="absolute -bottom-4 -left-4 hidden h-20 w-20 border-b border-l border-gold/50 sm:block" aria-hidden="true"></div>
+      <div class="absolute -right-3 -top-3 h-12 w-12 rounded-full border border-gold/25" aria-hidden="true"></div>
+    </div>
+
+  </div>
+</section>
+{% endwith %}
+
+<!-- 02 / CATEGORY DISCOVERY -->
+{% if categories %}
+<section id="categories" class="bg-soft py-20 sm:py-32">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+    <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+      <div>
+        <p class="kicker reveal">Start with a feeling</p>
+        <h2 class="mt-4 max-w-xl font-serif text-4xl leading-tight sm:text-5xl text-charcoal reveal">Find the piece that feels like you.</h2>
+      </div>
+      <p class="max-w-xs text-sm leading-7 text-gray-500 reveal">Browse the current edit by category, then take your time with the details.</p>
+    </div>
+    
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {% for category in categories %}
+      <a href="{% url 'catalog:product_list' %}?category={{ category.slug }}" class="category-card group rounded-sm reveal block overflow-hidden relative" style="min-height: 22rem;">
+        
+        {% if category.slug == 'accessories' %}
+        <img src="/media/products/accessories.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+        {% elif category.slug == 'rings' %}
+        <img src="/media/products/ringss.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+        {% elif category.slug == 'tailoring' %}
+        <img src="/media/products/tailoring.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+        {% elif category.slug == 'watches' %}
+        <img src="/media/products/watch.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+        {% else %}
+        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
+          <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
+        </div>
+        {% endif %}
+
+        <div class="absolute inset-0 bg-gradient-to-t from-[#171717] via-[#171717]/30 to-transparent"></div>
+        <span class="absolute bottom-6 left-6 z-10 right-6 flex items-end justify-between gap-2">
+          <span class="font-serif text-xl text-white sm:text-2xl">{{ category.name }}</span>
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/40 text-sm text-white transition group-hover:border-gold group-hover:bg-gold group-hover:text-charcoal">↗</span>
+        </span>
+
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- 03 / FEATURED COLLECTION -->
+<section class="bg-white py-20 sm:py-32">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+    <div class="flex flex-col justify-between gap-5 border-b border-gray-200 pb-7 sm:flex-row sm:items-end">
+      <div>
+        <p class="kicker reveal">The current edit</p>
+        <h2 class="mt-4 font-serif text-4xl sm:text-5xl reveal">Featured collection</h2>
+      </div>
+      <a href="{% url 'catalog:product_list' %}" class="text-xs font-semibold uppercase tracking-[0.16em] text-gold-dark transition hover:text-charcoal">
+        View all pieces ↗
+      </a>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {% for product in featured %}
+      <div class="group relative flex flex-col overflow-hidden rounded-sm border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
+        
+        <a href="{{ product.get_absolute_url }}" class="relative aspect-[4/5] overflow-hidden bg-gray-100 block">
+          
+          {% if "Emerald Halo" in product.name %}
+            <img src="/media/products/emaral.jpg" alt="{{ product.name }}" loading="lazy" class="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105">
+          {% elif "Classic Steel" in product.name %}
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" alt="{{ product.name }}" loading="lazy" class="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105">
+          {% elif "Rose Gold" in product.name %}
+            <img src="/media/products/rosegold-watch.jpg" alt="{{ product.name }}" loading="lazy" class="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105">
+          {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}
+            <img src="/media/products/agbada.jpg" alt="{{ product.name }}" loading="lazy" class="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105">
+          {% elif "Leather" in product.name %}
+            <img src="/media/products/leather.jpg" alt="{{ product.name }}" loading="lazy" class="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105">
+          {% elif product.primary_image %}
+            <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" loading="lazy" class="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105">
+          {% else %}
+            <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-4xl">
+              {{ product.name|first }}
+            </div>
+          {% endif %}
+
+          {% if product.is_new %}
+          <span class="absolute left-3 top-3 bg-gold px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-charcoal">New</span>
+          {% endif %}
+        </a>
+
+        <div class="flex flex-1 flex-col justify-between p-5">
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-gray-400">{{ product.category.name }}</p>
+            <h3 class="mt-1 font-serif text-lg text-charcoal">
+              <a href="{{ product.get_absolute_url }}" class="hover:text-gold transition">{{ product.name }}</a>
+            </h3>
+            <div class="mt-2 text-amber-500 text-xs">★★★★★</div>
+          </div>
+          
+          <div class="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">
+            <span class="font-medium text-charcoal">
+              {% if "Classic Steel" in product.name %}₦150,467.00
+              {% elif "Emerald Halo" in product.name %}₦145,000.00
+              {% elif "Rose Gold" in product.name %}₦50,565.00
+              {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}₦73,000.00
+              {% else %}₦{{ product.price }}{% endif %}
+            </span>
+            <a href="{{ product.get_absolute_url }}" class="rounded-sm border border-charcoal px-4 py-2 text-xs font-semibold uppercase tracking-wider text-charcoal transition hover:bg-charcoal hover:text-white">
+              View Piece
+            </a>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 05 / BRAND + TRUST -->
+<section class="bg-soft py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-5 reveal">
+        <p class="kicker">The ERINAYOMI point of view</p>
+        <h2 class="mt-5 font-serif text-4xl leading-tight sm:text-5xl text-charcoal">Style should stay with you.</h2>
+        <p class="mt-6 max-w-md leading-8 text-gray-600">The collection brings together jewelry, watches, accessories and tailoring in one considered place—so the things you choose can feel personal, not passing.</p>
+        {% if store_settings.address or store_settings.business_hours %}
+        <div class="mt-8 border-l border-gold pl-5 text-sm text-gray-500">
+          {% if store_settings.address %}<p>{{ store_settings.address }}</p>{% endif %}
+          {% if store_settings.business_hours %}<p class="mt-1">{{ store_settings.business_hours }}</p>{% endif %}
+        </div>
+        {% endif %}
+        <a href="{% url 'catalog:about' %}" class="mt-8 inline-flex text-xs font-semibold uppercase tracking-[0.16em] text-gold-dark hover:text-charcoal">Read the story ↗</a>
+      </div>
+      <div class="lg:col-span-7">
+        {% if real_reviews %}
+        <div class="grid gap-4 sm:grid-cols-2">
+          {% for review in real_reviews|slice:":4" %}
+          <article class="review-quote rounded-sm border border-[#e8dfd0] bg-white p-7 pt-10 reveal">
+            <div class="mb-4">{% include "components/star_rating.html" with rating=review.rating count=None %}</div>
+            <p class="font-serif text-xl leading-relaxed text-charcoal">{{ review.comment }}</p>
+            <div class="mt-6 flex items-center justify-between gap-3 text-xs text-gray-500">
+              <span>{{ review.user.get_full_name|default:review.user.username }}</span>
+              <a href="{{ review.product.get_absolute_url }}" class="text-gold-dark hover:text-charcoal">{{ review.product.name }}</a>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="border border-[#e8dfd0] bg-white p-8 sm:p-12 reveal">
+          <p class="text-[10px] uppercase tracking-[0.2em] text-gold-dark">A considered start</p>
+          <p class="mt-5 max-w-xl font-serif text-3xl leading-tight">The first chapter is shaped by what you choose next.</p>
+          <p class="mt-5 max-w-xl text-sm leading-7 text-gray-600">Explore the current collection or begin a conversation about a made-to-measure piece.</p>
+          <a href="{% url 'catalog:product_list' %}" class="btn btn-outline mt-7">Browse the collection</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 / FINAL CONVERSION -->
+<section class="bg-charcoal text-white py-16 sm:py-24 border-t border-white/10">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 text-center">
+    <p class="eyebrow justify-center reveal">Your next piece</p>
+    <h2 class="mt-6 font-serif text-4xl leading-tight sm:text-6xl reveal">Discover what feels like yours.</h2>
+    <p class="mx-auto mt-5 max-w-xl leading-8 text-white/60 reveal">Shop the edit, start a tailoring request, or speak with the team before you decide.</p>
+    <div class="mt-9 flex flex-wrap justify-center gap-3 reveal">
+      <a href="{% url 'catalog:product_list' %}" class="btn btn-gold">Shop now</a>
+      <a href="{% url 'catalog:contact' %}" class="btn btn-outline !border-white/30 !text-white hover:!border-white hover:!bg-white hover:!text-charcoal">Contact us</a>
+    </div>
+    <div class="mx-auto mt-16 max-w-lg border-t border-white/15 pt-10 reveal">
+      <p class="text-[10px] uppercase tracking-[0.22em] text-gold">Stay close to the edit</p>
+      <p class="mt-3 text-sm text-white/55">New arrivals and considered updates, when they are ready.</p>
+      <form action="{% url 'store_settings:newsletter_subscribe' %}" method="post" data-loading-submit class="mx-auto mt-5 flex max-w-md flex-col gap-3 sm:flex-row">
+        {% csrf_token %}
+        <label for="newsletter-email" class="sr-only">Email address</label>
+        <input id="newsletter-email" type="email" name="email" required placeholder="Your email address" class="input-field flex-1 !border-white/20 !bg-white/10 !text-white placeholder:!text-white/40">
+        <button type="submit" data-submit-btn data-loading-text="Joining…" class="btn btn-gold shrink-0">Join</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

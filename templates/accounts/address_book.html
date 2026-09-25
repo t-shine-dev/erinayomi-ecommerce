@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Address Book — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="max-w-3xl mx-auto px-4 sm:px-6 py-14">
+  <div class="kicker mb-3">My Account</div>
+  <h1 class="font-serif text-3xl mb-10">Saved Addresses</h1>
+
+  {% if addresses %}
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+    {% for addr in addresses %}
+    <div class="card-surface p-5 relative">
+      {% if addr.is_default %}<span class="badge badge-new absolute top-4 right-4">Default</span>{% endif %}
+      <div class="font-medium mb-1">{{ addr.label }}</div>
+      <p class="text-sm text-gray-600">{{ addr.full_name }}</p>
+      <p class="text-sm text-gray-600">{{ addr.address_line }}</p>
+      <p class="text-sm text-gray-600">{{ addr.city }}{% if addr.city and addr.state %}, {% endif %}{{ addr.state }}</p>
+      <p class="text-sm text-gray-600 mb-4">{{ addr.phone_number }}</p>
+      <div class="flex gap-3 text-xs">
+        {% if not addr.is_default %}
+        <form action="{% url 'accounts:set_default_address' addr.id %}" method="post" class="inline">
+          {% csrf_token %}
+          <button type="submit" class="text-gold-dark hover:underline">Set as default</button>
+        </form>
+        {% endif %}
+        <form action="{% url 'accounts:delete_address' addr.id %}" method="post" class="inline" onsubmit="return confirm('Remove this saved address?');">
+          {% csrf_token %}
+          <button type="submit" class="text-red-500 hover:underline">Remove</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center py-12 card-surface mb-10">
+    <p class="text-sm text-gray-500">No saved addresses yet — add one below for faster checkout.</p>
+  </div>
+  {% endif %}
+
+  <div class="card-surface p-7">
+    <h2 class="font-serif text-xl mb-5">Add New Address</h2>
+    <form method="post" data-loading-submit novalidate class="space-y-4">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="field-label" for="addr-label">Label</label>
+          <input id="addr-label" type="text" name="label" placeholder="Home, Office…" class="input-field">
+        </div>
+        <div>
+          <label class="field-label" for="addr-name">Full name</label>
+          <input id="addr-name" type="text" name="full_name" required class="input-field">
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="addr-phone">Phone number</label>
+        <input id="addr-phone" type="tel" name="phone_number" required class="input-field">
+      </div>
+      <div>
+        <label class="field-label" for="addr-line">Address</label>
+        <textarea id="addr-line" name="address_line" rows="2" required class="input-field"></textarea>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="field-label" for="addr-city">City</label>
+          <input id="addr-city" type="text" name="city" class="input-field">
+        </div>
+        <div>
+          <label class="field-label" for="addr-state">State</label>
+          <input id="addr-state" type="text" name="state" class="input-field">
+        </div>
+      </div>
+     <label class="flex items-center gap-2 text-sm cursor-pointer text-zinc-900">
+      <input type="checkbox" name="is_default" value="1" class="accent-gold-dark"> Set as default address
+    </label>
+      <button type="submit" data-submit-btn data-loading-text="Saving…" class="btn btn-primary">Save Address</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

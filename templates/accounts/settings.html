@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="max-w-2xl mx-auto px-4 sm:px-6 py-14">
+  <div class="kicker mb-3">My Account</div>
+  <h1 class="font-serif text-3xl mb-10">Settings</h1>
+
+  <div class="card-surface p-7 mb-6">
+    <h2 class="font-serif text-xl mb-5">Profile Information</h2>
+    <form method="post" data-loading-submit novalidate class="space-y-4">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="field-label" for="first_name">First name</label>
+          <input id="first_name" type="text" name="first_name" value="{{ user.first_name }}" placeholder="Enter first name" class="input-field bg-white text-zinc-900">
+        </div>
+        <div>
+          <label class="field-label" for="last_name">Last name</label>
+          <input id="last_name" type="text" name="last_name" value="{{ user.last_name }}" placeholder="Enter last name" class="input-field bg-white text-zinc-900">
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="email">Email</label>
+        <input id="email" type="email" name="email" required value="" placeholder="e.g. name@example.com" class="input-field bg-white text-zinc-900">
+      </div>
+      <div>
+        <label class="field-label" for="phone_number">Phone number</label>
+        <input id="phone_number" type="tel" name="phone_number" value="" placeholder="Enter your phone number"class="input-field bg-white text-zinc-900">
+      </div>
+      <div>
+        <label class="field-label" for="address">Default shipping address</label>
+        <textarea id="address" name="address" rows="3" placeholder="Enter your delivery address" class="input-field bg-white text-zinc-900"></textarea>
+      </div>
+      <button type="submit" data-submit-btn data-loading-text="Saving…" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+
+  <div class="card-surface p-7 flex items-center justify-between flex-wrap gap-4">
+    <div>
+      <h2 class="font-serif text-xl mb-1">Password</h2>
+      <p class="text-sm text-gray-500">Change your account password.</p>
+    </div>
+    <a href="{% url 'accounts:password_change' %}" class="btn btn-outline">Change Password</a>
+  </div>
+</section>
+{% endblock %}

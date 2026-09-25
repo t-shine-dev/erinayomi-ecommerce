@@ -1,0 +1,10 @@
+{% comment %}Usage: {% include "components/measurement_item.html" with label="Chest" desc="..." %}{% endcomment %}
+<div class="card-surface p-5 flex items-start gap-4 reveal">
+  <span class="w-8 h-8 rounded-full bg-soft flex items-center justify-center text-gold-dark shrink-0">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h18M7 8v8M17 8v8"/></svg>
+  </span>
+  <div>
+    <div class="font-medium mb-1">{{ label }}</div>
+    <p class="text-sm text-gray-500 leading-relaxed">{{ desc }}</p>
+  </div>
+</div>

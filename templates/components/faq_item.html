@@ -1,0 +1,8 @@
+{% comment %}Usage: {% include "components/faq_item.html" with q="..." a="..." %}{% endcomment %}
+<details class="card-surface p-5 group reveal">
+  <summary class="flex items-center justify-between cursor-pointer font-medium list-none">
+    {{ q }}
+    <svg class="w-4 h-4 text-gold-dark transition group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+  </summary>
+  <p class="text-sm text-gray-600 leading-relaxed mt-3">{{ a }}</p>
+</details>

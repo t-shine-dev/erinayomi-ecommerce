@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block content %}
+<section class="max-w-3xl mx-auto px-4 sm:px-6 py-14">
+  <div class="kicker mb-3 !text-amber-400">Order Details</div>
+  <h1 class="font-serif text-3xl mb-1 !text-white">{{ order.order_number }}</h1>
+  <p class="text-sm !text-gray-300 mb-8">
+    Placed {{ order.created_at|date:"M d, Y H:i" }} &middot;
+    <span class="badge {% if order.status == 'paid' %}badge-new{% elif order.status == 'cancelled' %}badge-out{% else %}badge-outline{% endif %} align-middle">{{ order.get_status_display }}</span>
+  </p>
+
+  <div class="card-surface p-6 mb-8 !text-black">
+    {% include "components/order_tracker.html" with order=order %}
+  </div>
+
+  <div class="card-surface divide-y divide-gray-300 mb-8 !text-black">
+    {% for item in order.items.all %}
+    <div class="flex justify-between py-3 px-5 text-sm">
+      <span class="!text-black">{{ item.product_name }} &times; {{ item.quantity }}</span>
+      <span class="!text-black font-medium">₦{{ item.subtotal|floatformat:2|intcomma }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Subtotal, Shipping, and Total Section -->
+  <div class="max-w-xs ml-auto space-y-2 text-sm mb-12 p-4 card-surface !bg-zinc-900/90 border border-gold/30 rounded-lg shadow-lg">
+    <div class="flex justify-between items-center"><span class="!text-white font-medium">Subtotal</span><span class="!text-white font-semibold">₦{{ order.subtotal|floatformat:2|intcomma }}</span></div>
+    <div class="flex justify-between items-center"><span class="!text-white font-medium">Shipping</span><span class="!text-white font-semibold">₦{{ order.shipping_fee|floatformat:2|intcomma }}</span></div>
+    <div class="divider-gold !my-2"></div>
+    <div class="flex justify-between items-center font-serif text-base pt-1"><span class="!text-gold font-bold">Total</span><span class="!text-white font-bold text-lg">₦{{ order.total|floatformat:2|intcomma }}</span></div>
+  </div>
+
+  <div class="card-surface p-6 text-sm !text-black mb-6">
+    <p class="field-label mb-2 !text-black font-semibold">{% if order.delivery_method == "pickup" %}Store Pickup{% else %}Shipping to{% endif %}</p>
+    <p class="!text-black font-medium text-base">{{ order.full_name }}</p>
+    {% if order.delivery_method != "pickup" %}
+    <p class="!text-black">{{ order.shipping_address }}</p>
+    <p class="!text-black">{{ order.city }}{% if order.city and order.state %}, {% endif %}{{ order.state }}</p>
+    {% endif %}
+    <p class="!text-black mt-1">{{ order.phone_number }} &middot; {{ order.email }}</p>
+    {% if order.delivery_date or order.delivery_time %}
+    <p class="mt-2 !text-black">Requested delivery: {{ order.delivery_date|date:"M d, Y"|default:"Any date" }}{% if order.delivery_time %} &middot; {{ order.delivery_time }}{% endif %}</p>
+    {% endif %}
+    {% if order.order_notes %}<p class="mt-2 italic !text-black">"{{ order.order_notes }}"</p>{% endif %}
+  </div>
+
+  <div class="text-center print:hidden">
+    <button onclick="window.print()" class="btn btn-outline !text-black !border-black hover:bg-black hover:!text-white">Print / Save as PDF</button>
+  </div>
+</section>
+{% endblock %}

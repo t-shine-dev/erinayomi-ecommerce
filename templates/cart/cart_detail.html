@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Cart — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="bg-soft py-14 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+  <div class="kicker mb-3">Step 1 of 2</div>
+  <h1 class="font-serif text-4xl md:text-5xl mb-3 text-charcoal">Your Cart</h1>
+  <p class="mb-10 text-sm text-zinc-600">A closer look at the pieces you chose.</p>
+
+  {% if cart_items %}
+  <div class="card-surface divide-y divide-gray-200 bg-white border border-gray-200 shadow-sm">
+    {% for item in cart_items %}
+    <div class="flex items-center gap-4 p-4">
+      
+      <!-- Product Image with Explicit Name Mapping & Fallbacks -->
+      <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
+        {% if "Classic Steel" in item.product.name %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% elif "Leather Card Wallet" in item.product.name %}
+        <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% elif "Tailored Kaftan" in item.product.name %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% elif "Emerald Halo" in item.product.name %}
+        <img src="/media/products/emaral.jpg" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% elif "Rose Gold" in item.product.name %}
+        <img src="/media/products/rosegold-watch.jpg" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% elif "Bespoke Agbada" in item.product.name or "Agbada" in item.product.name %}
+        <img src="/media/products/agbada.jpg" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% elif item.product.primary_image %}
+        <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+        {% else %}
+        <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-xl">
+          {{ item.product.name|first }}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <a href="{{ item.product.get_absolute_url }}" class="font-serif text-lg text-charcoal hover:text-gold-dark transition truncate block font-medium">{{ item.product.name }}</a>
+        <div class="text-sm text-zinc-600">₦{{ item.product.current_price|floatformat:0|intcomma }} each</div>
+      </div>
+
+      <form action="{% url 'cart:update_cart_item' item.id %}" method="post" data-loading-submit class="flex items-center gap-2">
+        {% csrf_token %}
+        <label class="sr-only" for="qty-{{ item.id }}">Quantity for {{ item.product.name }}</label>
+        <input id="qty-{{ item.id }}" type="number" name="quantity" value="{{ item.quantity }}" min="0" class="input-field w-16 !py-1.5 text-center text-charcoal border border-gray-300">
+        <button type="submit" data-submit-btn data-loading-text="…" class="text-xs uppercase tracking-wide font-semibold text-gold-dark hover:underline">Update</button>
+      </form>
+
+      <div class="w-28 text-right font-semibold text-charcoal">₦{{ item.subtotal|floatformat:0|intcomma }}</div>
+
+       <form action="{% url 'cart:remove_from_cart' item.id %}" method="post">
+         {% csrf_token %}
+         <button type="submit" aria-label="Remove {{ item.product.name }}" class="text-gray-400 hover:text-red-600 transition p-1">
+           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+         </button>
+       </form>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="flex flex-col sm:flex-row justify-between items-start gap-6 mt-8">
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-outline">&larr; Continue Shopping</a>
+
+    <div class="w-full sm:w-80 card-surface p-6 bg-white border border-gray-200 shadow-sm">
+      {% if amount_to_free_shipping %}
+      <p class="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-3 py-2 mb-5 font-medium">
+        Add ₦{{ amount_to_free_shipping|floatformat:0|intcomma }} more to unlock free delivery!
+      </p>
+      {% endif %}
+      <div class="field-label mb-2 text-charcoal font-semibold">Have a coupon?</div>
+      <div class="flex gap-2 mb-5">
+        <input type="text" placeholder="Coupon code" class="input-field border border-gray-300" disabled>
+        <button type="button" disabled class="btn btn-outline !py-2">Apply</button>
+      </div>
+      <p class="text-xs text-zinc-500 mb-5">Coupon codes are coming soon.</p>
+      <div class="divider-gold mb-4"></div>
+      <div class="flex justify-between text-sm mb-2">
+        <span class="text-zinc-600">Subtotal</span>
+        <span class="text-charcoal font-medium">₦{{ cart.total|floatformat:0|intcomma }}</span>
+      </div>
+      <div class="flex justify-between text-sm mb-2">
+        <span class="text-zinc-600">Estimated Shipping</span>
+        <span class="text-charcoal font-medium">{% if estimated_shipping %}₦{{ estimated_shipping|floatformat:0|intcomma }}{% else %}Free{% endif %}</span>
+      </div>
+      <div class="divider-gold my-3"></div>
+      <div class="flex justify-between font-semibold text-base mb-2 text-charcoal">
+        <span>Estimated Total</span>
+       <span>₦{{ estimated_total|floatformat:0|intcomma }}</span>
+      </div>
+      <p class="text-xs text-zinc-500 mb-2">Final shipping is confirmed at checkout based on delivery method.</p>
+      <a href="{% url 'orders:checkout' %}" class="btn btn-primary w-full mt-4 text-center">Proceed to Checkout</a>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="text-center py-20 card-surface reveal bg-white border border-gray-200 shadow-sm">
+    <div class="w-16 h-16 mx-auto rounded-full bg-soft flex items-center justify-center mb-5 text-gold-dark">
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13L5.4 5M7 13l-2 5h13M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+    </div>
+    <p class="font-serif text-xl mb-2 text-charcoal">Your cart is empty</p>
+    <p class="text-sm text-zinc-600 mb-6">Browse the collection and find something you love.</p>
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Start Shopping</a>
+  </div>
+  {% endif %}
+  </div>
+</section>
+{% endblock %}

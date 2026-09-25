@@ -1,0 +1,13 @@
+{% comment %}
+Usage: {% include "components/star_rating.html" with rating=product.average_rating count=product.review_count %}
+{% endcomment %}
+<div class="flex items-center gap-1" aria-label="Rated {{ rating }} out of 5">
+  {% for i in "12345" %}
+    {% if forloop.counter <= rating %}
+    <svg class="w-3.5 h-3.5 fill-gold" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.44 5.98.7-4.4 4.1 1.16 5.93L10 14.9l-5.34 2.77L5.82 11.7 1.42 7.6l5.98-.7z"/></svg>
+    {% else %}
+    <svg class="w-3.5 h-3.5 fill-gray-200" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.44 5.98.7-4.4 4.1 1.16 5.93L10 14.9l-5.34 2.77L5.82 11.7 1.42 7.6l5.98-.7z"/></svg>
+    {% endif %}
+  {% endfor %}
+  {% if count is not None %}<span class="text-xs text-gray-500 ml-1">({{ count }})</span>{% endif %}
+</div>

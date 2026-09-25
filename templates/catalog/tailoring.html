@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}Tailoring — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+
+<section class="bg-charcoal text-white py-24 text-center">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 reveal">
+    <div class="kicker justify-center mb-4">Bespoke Tailoring</div>
+    <h1 class="font-serif text-4xl md:text-5xl mb-5">Made to Fit, Made to Last</h1>
+    <p class="text-white/70 leading-relaxed mb-8">
+      Agbadas, kaftans, suits and alterations — begin your request with the service and details that matter to you.
+    </p>
+    <a href="#book" class="btn btn-gold">Book an Appointment</a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+  <div class="text-center mb-14">
+    <div class="kicker justify-center mb-3 reveal">How It Works</div>
+    <h2 class="font-serif text-3xl md:text-4xl reveal">The Custom Order Process</h2>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="text-center reveal">
+      <div class="w-12 h-12 mx-auto rounded-full bg-soft flex items-center justify-center mb-4 font-serif text-gold-dark text-lg">1</div>
+      <div class="font-serif text-lg mb-1 text-zinc-900">Request</div>
+      <p class="text-sm text-gray-600">Tell us the service, style, and preferred date below.</p>
+    </div>
+    <div class="text-center reveal">
+      <div class="w-12 h-12 mx-auto rounded-full bg-soft flex items-center justify-center mb-4 font-serif text-gold-dark text-lg">2</div>
+      <div class="font-serif text-lg mb-1 text-zinc-900">Confirm</div>
+       <p class="text-sm text-gray-600">Your request gives the team the details needed for the next conversation.</p>
+    </div>
+    <div class="text-center reveal">
+      <div class="w-12 h-12 mx-auto rounded-full bg-soft flex items-center justify-center mb-4 font-serif text-gold-dark text-lg">3</div>
+       <div class="font-serif text-lg mb-1 text-zinc-900">Clarify</div>
+       <p class="text-sm text-gray-600">Share measurements, references or questions before the work begins.</p>
+    </div>
+    <div class="text-center reveal">
+      <div class="w-12 h-12 mx-auto rounded-full bg-soft flex items-center justify-center mb-4 font-serif text-gold-dark text-lg">4</div>
+       <div class="font-serif text-lg mb-1 text-zinc-900">Create</div>
+       <p class="text-sm text-gray-600">Move forward with a clear brief for your chosen garment or alteration.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEASUREMENT GUIDE -->
+<section id="measurement-guide" class="bg-soft py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <div class="kicker justify-center mb-3 reveal">Taking Your Own Measurements</div>
+      <h2 class="font-serif text-3xl md:text-4xl reveal text-zinc-900">Measurement Guide</h2>
+      <p class="text-gray-700 mt-3 reveal">Not sure how? Leave the notes blank on the form and our team will guide you by phone.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="card-surface p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="flex items-center space-x-3 mb-1">
+          <div class="w-7 h-7 rounded-full bg-soft flex items-center justify-center text-gold-dark text-xs flex-shrink-0">↔</div>
+          <div class="font-medium text-sm text-zinc-900">Chest</div>
+        </div>
+        <p class="text-xs text-gray-600 pl-10">Measure around the fullest part of your chest, under the arms.</p>
+      </div>
+      <div class="card-surface p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="flex items-center space-x-3 mb-1">
+          <div class="w-7 h-7 rounded-full bg-soft flex items-center justify-center text-gold-dark text-xs flex-shrink-0">↔</div>
+          <div class="font-medium text-sm text-zinc-900">Shoulder</div>
+        </div>
+        <p class="text-xs text-gray-600 pl-10">Measure from the edge of one shoulder to the other, across the back.</p>
+      </div>
+      <div class="card-surface p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="flex items-center space-x-3 mb-1">
+          <div class="w-7 h-7 rounded-full bg-soft flex items-center justify-center text-gold-dark text-xs flex-shrink-0">↔</div>
+          <div class="font-medium text-sm text-zinc-900">Sleeve Length</div>
+        </div>
+        <p class="text-xs text-gray-600 pl-10">From shoulder edge to wrist bone, with arm slightly bent.</p>
+      </div>
+      <div class="card-surface p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="flex items-center space-x-3 mb-1">
+          <div class="w-7 h-7 rounded-full bg-soft flex items-center justify-center text-gold-dark text-xs flex-shrink-0">↔</div>
+          <div class="font-medium text-sm text-zinc-900">Waist</div>
+        </div>
+        <p class="text-xs text-gray-600 pl-10">Measure around your natural waistline, keeping the tape snug.</p>
+      </div>
+      <div class="card-surface p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="flex items-center space-x-3 mb-1">
+          <div class="w-7 h-7 rounded-full bg-soft flex items-center justify-center text-gold-dark text-xs flex-shrink-0">↔</div>
+          <div class="font-medium text-sm text-zinc-900">Hip</div>
+        </div>
+        <p class="text-xs text-gray-600 pl-10">Measure around the fullest part of your hips.</p>
+      </div>
+      <div class="card-surface p-5 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div class="flex items-center space-x-3 mb-1">
+          <div class="w-7 h-7 rounded-full bg-soft flex items-center justify-center text-gold-dark text-xs flex-shrink-0">↔</div>
+          <div class="font-medium text-sm text-zinc-900">Inseam / Length</div>
+        </div>
+        <p class="text-xs text-gray-600 pl-10">From crotch to ankle bone for trousers, or shoulder to hem for agbada/kaftan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<!-- PORTFOLIO -->
+<section class="max-w-4xl mx-auto px-4 sm:px-6 py-20">
+  <div class="text-center mb-12">
+    <div class="kicker justify-center mb-3 reveal">Recent Work</div>
+    <h2 class="font-serif text-3xl md:text-4xl reveal">Tailoring Portfolio</h2>
+  </div>
+  <!-- Centered Grid Container with adjusted width and height -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-lg mx-auto justify-center">
+    <div class="w-full h-96 rounded-lg overflow-hidden shadow-md">
+      <img src="/media/products/agbada.jpg" alt="Agbada" class="w-full h-full object-cover">
+    </div>
+    <div class="w-full h-96 rounded-lg overflow-hidden shadow-md">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" alt="Tailored Kaftan" class="w-full h-full object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="book" class="bg-charcoal text-white py-20">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-10">
+      <div class="kicker justify-center mb-3 reveal">Reserve Your Slot</div>
+      <h2 class="font-serif text-3xl md:text-4xl reveal">Book a Tailoring Appointment</h2>
+    </div>
+    <form method="post" enctype="multipart/form-data" data-loading-submit novalidate class="bg-white text-charcoal rounded p-7 space-y-4">
+      {% csrf_token %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="field-label" for="tl-name">Full name</label>
+          <input id="tl-name" type="text" name="full_name" required class="input-field">
+        </div>
+        <div>
+          <label class="field-label" for="tl-phone">Phone number</label>
+          <input id="tl-phone" type="tel" name="phone_number" required class="input-field">
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="tl-email">Email</label>
+        <input id="tl-email" type="email" name="email" required class="input-field">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="field-label" for="tl-service">Garment type</label>
+          <select id="tl-service" name="service_type" required class="input-field">
+            {% for value, label in service_types %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="tl-date">Preferred fitting date</label>
+          <input id="tl-date" type="date" name="preferred_date" class="input-field">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="field-label" for="tl-time">Preferred time</label>
+          <select id="tl-time" name="preferred_time" class="input-field">
+            <option value="">No preference</option>
+            <option value="Morning (9am - 12pm)">Morning (9am – 12pm)</option>
+            <option value="Afternoon (12pm - 4pm)">Afternoon (12pm – 4pm)</option>
+            <option value="Evening (4pm - 7pm)">Evening (4pm – 7pm)</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="tl-completion">Needed by</label>
+          <input id="tl-completion" type="date" name="completion_date" class="input-field">
+        </div>
+      </div>
+
+      <div class="divider-gold !my-6"></div>
+
+      <div>
+        <div class="field-label mb-3">Measurements (inches) <span class="normal-case text-gray-400">— optional, leave blank if unsure</span></div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="text-xs text-gray-500" for="tl-chest">Chest</label>
+            <input id="tl-chest" type="number" step="0.5" min="0" name="measurement_chest" class="input-field">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500" for="tl-waist">Waist</label>
+            <input id="tl-waist" type="number" step="0.5" min="0" name="measurement_waist" class="input-field">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500" for="tl-hip">Hip</label>
+            <input id="tl-hip" type="number" step="0.5" min="0" name="measurement_hip" class="input-field">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500" for="tl-shoulder">Shoulder</label>
+            <input id="tl-shoulder" type="number" step="0.5" min="0" name="measurement_shoulder" class="input-field">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500" for="tl-sleeve">Sleeve</label>
+            <input id="tl-sleeve" type="number" step="0.5" min="0" name="measurement_sleeve" class="input-field">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500" for="tl-length">Length</label>
+            <input id="tl-length" type="number" step="0.5" min="0" name="measurement_length" class="input-field">
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">Not sure how to measure? See the <a href="#measurement-guide" class="text-gold-dark hover:underline">guide above</a> or leave blank — we'll help you by phone.</p>
+      </div>
+
+      <div>
+        <label class="field-label" for="tl-measurements">Additional notes <span class="normal-case text-gray-400">(or write "need help")</span></label>
+        <textarea id="tl-measurements" name="measurements_notes" rows="2" class="input-field" placeholder="Anything else about fit or sizing…"></textarea>
+      </div>
+      <div>
+        <label class="field-label" for="tl-refs">Style references / fabric preference</label>
+        <textarea id="tl-refs" name="reference_notes" rows="2" class="input-field"></textarea>
+      </div>
+      <div>
+        <label class="field-label" for="tl-image">Inspiration photo <span class="normal-case text-gray-400">(optional)</span></label>
+        <input id="tl-image" type="file" name="inspiration_image" accept="image/*" class="input-field !py-1.5">
+      </div>
+      <button type="submit" data-submit-btn data-loading-text="Sending request…" class="btn btn-primary w-full !py-3.5">Request Appointment</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

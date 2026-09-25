@@ -1,0 +1,12 @@
+{% if request.user.is_authenticated and store_settings.whatsapp_link %}
+<a href="{{ store_settings.whatsapp_link }}" target="_blank" rel="noopener"
+   aria-label="Chat with {{ store_settings.business_name }} on WhatsApp"
+   class="fixed bottom-6 right-6 z-50 group">
+  <span class="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping"></span>
+  <span class="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-luxe hover:scale-105 transition">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-7 h-7 fill-white" aria-hidden="true">
+      <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.697 4.61 1.899 6.478L4 29l7.72-1.855A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.6a9.55 9.55 0 0 1-4.87-1.33l-.35-.207-4.58 1.1 1.12-4.46-.23-.37A9.56 9.56 0 1 1 25.56 15c0 5.294-4.27 9.6-9.559 9.6zm5.24-7.16c-.287-.144-1.7-.84-1.963-.936-.263-.096-.455-.144-.647.144-.192.288-.743.936-.911 1.128-.168.192-.335.216-.622.072-.287-.144-1.212-.447-2.31-1.428-.854-.762-1.43-1.703-1.598-1.99-.168-.288-.018-.443.126-.587.13-.129.287-.336.43-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.647-1.56-.887-2.137-.234-.562-.472-.486-.647-.495l-.551-.01c-.192 0-.504.072-.768.36-.263.288-1.006.983-1.006 2.398s1.03 2.782 1.174 2.974c.144.192 2.027 3.096 4.912 4.34.686.296 1.221.473 1.639.605.688.219 1.315.188 1.81.114.552-.082 1.7-.695 1.94-1.367.24-.671.24-1.247.168-1.367-.072-.12-.263-.192-.551-.336z"/>
+    </svg>
+  </span>
+</a>
+{% endif %}

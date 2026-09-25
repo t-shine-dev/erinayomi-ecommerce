@@ -1,0 +1,326 @@
+/* ==========================================
+   ERINAYOMI Complete Brand & Layout Stylesheet
+   ========================================== */
+
+:root {
+  --erinayomi-ink: #171717;
+  --erinayomi-gold: #c7a24b;
+  --erinayomi-ivory: #f6f2eb;
+  --erinayomi-line: rgba(199, 162, 75, 0.45);
+}
+
+
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--erinayomi-gold);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  content: "";
+}
+
+.hero-stage {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(199, 162, 75, 0.16), transparent 28rem),
+    radial-gradient(circle at 85% 80%, rgba(139, 94, 60, 0.18), transparent 26rem),
+    #171717;
+}
+
+.hero-stage::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 5rem 5rem;
+  content: "";
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
+  pointer-events: none;
+}
+
+
+/* Compact Mobile Input Sizing for Zero-Scroll Layout */
+.card-surface input:not([type="checkbox"]):not([type="radio"]), 
+.card-surface select, 
+.card-surface textarea {
+  padding-top: 0.35rem !important;
+  padding-bottom: 0.35rem !important;
+  font-size: 0.85rem !important;
+  height: auto !important;
+}
+
+.hero-image-frame {
+  position: relative;
+  min-height: 34rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #262626;
+}
+
+.hero-image-frame::before {
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid var(--erinayomi-line);
+  content: "";
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================
+   Product & Accessory 5-Image Gallery Frames
+   ========================================== */
+.category-grid-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.category-card,
+.product-card-frame {
+  position: relative;
+  width: 100%;
+  min-height: 22rem;
+  overflow: hidden;
+  background: #262626;
+  border-radius: 0.5rem;
+}
+
+.category-card::after,
+.product-card-frame::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(23, 23, 23, 0.95), rgba(23, 23, 23, 0.2) 60%);
+  content: "";
+  pointer-events: none;
+  z-index: 2;
+}
+
+.category-card img,
+.product-card-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center;
+  z-index: 1;
+  transition: transform 0.8s cubic-bezier(0.2, 0.65, 0.25, 1), filter 0.8s ease;
+}
+
+.category-card:hover img,
+.product-card-frame:hover img {
+  filter: saturate(1.1);
+  transform: scale(1.07);
+}
+
+.image-indicator-bar {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 4px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.product-card-frame:hover .image-indicator-bar {
+  opacity: 1;
+}
+
+.image-indicator-bar span {
+  flex: 1;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.image-indicator-bar span.active {
+  background-color: var(--erinayomi-gold);
+}
+
+.editorial-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--erinayomi-gold), transparent);
+}
+
+.section-copy {
+  max-width: 38rem;
+}
+
+.review-quote {
+  position: relative;
+}
+
+.review-quote::before {
+  position: absolute;
+  top: -0.8rem;
+  left: 0;
+  color: var(--erinayomi-gold);
+  content: "“";
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+/* ==========================================
+   STANDARD ALIGNMENT (Input First, Text Second)
+   ========================================== */
+
+.card-surface .availability-option {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* Aligns items to the left */
+    gap: 0.75rem !important; /* Adds clean spacing between the radio button and text */
+    width: 100% !important;
+    padding: 0.35rem 0 !important;
+    cursor: pointer !important;
+}
+
+.card-surface .availability-option input[type="radio"] {
+    width: 1rem !important;
+    min-width: 1rem !important;
+    height: 1rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline-block !important;
+    background-color: transparent !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    order: 1 !important; /* Forces the radio button to the front */
+}
+
+.card-surface .availability-option span {
+    color: #374151 !important;
+    opacity: 1 !important;
+    font-size: 0.9rem !important;
+    order: 2 !important; /* Forces the text to follow after the radio button */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    width: 100% !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #171717 !important;
+}
+
+select[name="country_code"], select#id_country_code {
+  background-color: #262626;
+  color: #f6f2eb;
+  border: 1px solid rgba(199, 162, 75, 0.45);
+}
+
+select[name="country_code"]:focus, select#id_country_code:focus {
+  border-color: #c7a24b;
+  outline: none;
+  box-shadow: 0 0 0 1px #c7a24b;
+}
+
+/* ==========================================
+   Media Queries & Mobile Viewport Tightening
+   ========================================== */
+
+/* ==========================================
+   Media Queries & Mobile Viewport Tightening
+   ========================================== */
+
+@media (max-width: 640px) {
+  .hero-image-frame {
+    min-height: 24rem;
+  }
+  .hero-image-frame::before {
+    inset: 0.5rem;
+  }
+  .category-card,
+  .product-card-frame {
+    min-height: 14rem;
+  }
+}
+
+@media (max-height: 750px) {
+  .register-card-container, 
+  form.card-surface, 
+  .auth-card {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+  form .space-y-4 > * + *,
+  form .space-y-6 > * + * {
+    margin-top: 0.35rem !important;
+  }
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-card img,
+  .product-card-frame img {
+    transition: none;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .print\:hidden,
+  #whatsapp-float {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image-frame {
+    min-height: 20rem;
+  }
+  .category-card,
+  .product-card-frame {
+    min-height: 12rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-image-frame {
+    min-height: 28rem;
+  }
+  .category-card,
+  .product-card-frame {
+    min-height: 18rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-image-frame {
+    min-height: 34rem;
+  }
+  .category-card,
+  .product-card-frame {
+    min-height: 22rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero-image-frame {
+    min-height: 38rem;
+  }
+  .category-card,
+  .product-card-frame {
+    min-height: 25rem;
+  }
+} 

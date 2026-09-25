@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Checkout — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="bg-soft py-14 sm:py-20">
+<div class="max-w-5xl mx-auto px-4 sm:px-6">
+  <div class="kicker mb-3">Step 2 of 2</div>
+  <h1 class="font-serif text-3xl md:text-4xl mb-10">Checkout</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <form method="post" data-loading-submit novalidate class="md:col-span-2 space-y-5 card-surface p-7">
+      {% csrf_token %}
+      <h2 class="font-serif text-xl mb-1">Billing &amp; Shipping Details</h2>
+      <p class="text-sm text-gray-500 mb-4">We'll use this to deliver your order and send your receipt.</p>
+
+      {% if saved_addresses %}
+      <div>
+        <label class="field-label" for="saved-address-select">Use a saved address</label>
+        <select id="saved-address-select" class="input-field text-gray-900 bg-white" onchange="fillSavedAddress(this)">
+          <option value="">— Enter a new address —</option>
+          {% for addr in saved_addresses %}
+          <option value="{{ addr.id }}"
+                  data-name="{{ addr.full_name }}" data-phone="{{ addr.phone_number }}"
+                  data-line="{{ addr.address_line }}" data-city="{{ addr.city }}" data-state="{{ addr.state }}"
+                  {% if addr.is_default %}selected{% endif %}>
+            {{ addr.label }} — {{ addr.address_line|truncatechars:40 }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+
+      <div>
+        <label class="field-label" for="full_name">Full name</label>
+        <input id="full_name" type="text" name="full_name" required value="{{ user.get_full_name }}" class="input-field text-gray-900 bg-white">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label class="field-label" for="email">Email</label>
+          <input id="email" type="email" name="email" required value="{{ user.email }}" class="input-field text-gray-900 bg-white">
+        </div>
+        <div>
+          <label class="field-label" for="phone_number">Phone number</label>
+          <input id="phone_number" type="tel" name="phone_number" required value="{{ user.phone_number }}" class="input-field text-gray-900 bg-white">
+        </div>
+      </div>
+      <div>
+        <label class="field-label" for="shipping_address">Street address</label>
+        <textarea id="shipping_address" name="shipping_address" rows="3" required class="input-field text-gray-900 bg-white">{{ user.address }}</textarea>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label class="field-label" for="city">City</label>
+          <input id="city" type="text" name="city" class="input-field text-gray-900 bg-white">
+        </div>
+        <div>
+          <label class="field-label" for="state">State</label>
+          <input id="state" type="text" name="state" class="input-field text-gray-900 bg-white">
+        </div>
+      </div>
+
+      <div class="divider-gold !my-6"></div>
+
+      <div>
+        <div class="field-label mb-3">Delivery method</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label id="delivery-method-label" class="card-surface p-4 flex items-center gap-3 cursor-pointer border-gold bg-white">
+            <input type="radio" name="delivery_method" value="delivery" checked onchange="updateShippingDisplay()" class="accent-gold-dark">
+            <div>
+              <div class="font-medium text-sm text-zinc-900">Home Delivery</div>
+              <div class="text-xs text-zinc-600" id="delivery-fee-note"></div>
+            </div>
+          </label>
+          <label id="pickup-method-label" class="card-surface p-4 flex items-center gap-3 cursor-pointer bg-white">
+            <input type="radio" name="delivery_method" value="pickup" onchange="updateShippingDisplay()" class="accent-gold-dark">
+            <div>
+              <div class="font-medium text-sm text-zinc-900">Store Pickup</div>
+              <div class="text-xs text-zinc-600">Free — pick up at our store</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label class="field-label" for="delivery_date">Preferred date <span class="normal-case text-gray-400">(optional)</span></label>
+          <input id="delivery_date" type="date" name="delivery_date" class="input-field text-gray-900 bg-white">
+        </div>
+        <div>
+          <label class="field-label" for="delivery_time">Preferred time</label>
+          <select id="delivery_time" name="delivery_time" class="input-field text-gray-900 bg-white">
+            <option value="">No preference</option>
+            <option value="Morning (9am - 12pm)">Morning (9am – 12pm)</option>
+            <option value="Afternoon (12pm - 4pm)">Afternoon (12pm – 4pm)</option>
+            <option value="Evening (4pm - 7pm)">Evening (4pm – 7pm)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="field-label" for="order_notes">Order notes <span class="normal-case text-gray-400">(optional)</span></label>
+        <textarea id="order_notes" name="order_notes" rows="2" placeholder="Gift wrap, ring size, delivery instructions…" class="input-field text-gray-900 bg-white"></textarea>
+      </div>
+
+      <div class="divider-gold !my-6"></div>
+
+      <div class="flex items-center gap-3 text-sm text-gray-500 mb-2">
+        <svg class="w-5 h-5 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Payment is completed securely on Paystack's hosted checkout.
+      </div>
+
+      <button type="submit" data-submit-btn data-loading-text="Redirecting to Paystack…" class="btn btn-primary w-full !py-4">
+        Pay with Paystack
+      </button>
+    </form>
+
+    <div class="card-surface p-6 h-fit md:sticky md:top-24">
+      <h2 class="font-serif text-xl mb-5">Order Summary</h2>
+      <div class="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
+        {% for item in cart_items %}
+        <div class="flex items-center gap-3 text-sm">
+          
+          <!-- Product Image Mapping for Checkout Summary -->
+          <div class="w-12 h-12 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
+            {% if "Classic Steel" in item.product.name %}
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% elif "Leather Card Wallet" in item.product.name %}
+            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% elif "Tailored Kaftan" in item.product.name %}
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% elif "Emerald Halo" in item.product.name %}
+            <img src="/media/products/emaral.jpg" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% elif "Rose Gold" in item.product.name %}
+            <img src="/media/products/rosegold-watch.jpg" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% elif "Bespoke Agbada" in item.product.name or "Agbada" in item.product.name %}
+            <img src="/media/products/agbada.jpg" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% elif item.product.primary_image %}
+            <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover" alt="{{ item.product.name }}">
+            {% else %}
+            <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-sm">
+              {{ item.product.name|first }}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="flex-1">
+            <div class="truncate">{{ item.product.name }}</div>
+            <div class="text-xs text-gray-400">Qty {{ item.quantity }}</div>
+          </div>
+          <div class="font-medium">₦{{ item.subtotal|floatformat:0|intcomma }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="divider-gold my-4"></div>
+      <div class="flex justify-between text-sm mb-2">
+        <span class="text-gray-500">Subtotal</span>
+        <span id="summary-subtotal">₦{{ cart.total|floatformat:0|intcomma }}</span>
+      </div>
+      <div class="flex justify-between text-sm mb-4">
+        <span class="text-gray-500">Shipping</span>
+        <span id="summary-shipping">{% if estimated_shipping %}₦{{ estimated_shipping|floatformat:0|intcomma }}{% else %}Free{% endif %}</span>
+      </div>
+      <div class="flex justify-between font-semibold text-base">
+        <span>Total</span>
+         <span id="summary-total">₦{{ estimated_total|floatformat:0|intcomma }}</span>
+      </div>
+    </div>
+   </div>
+  </div>
+  </section>
+
+<script>
+  var cartSubtotal = Number('{{ cart.total|default:"0" }}') || 0;
+  var estimatedShipping = Number('{{ estimated_shipping|default:"0" }}') || 0;
+
+  function updateShippingDisplay() {
+    var pickup = document.querySelector('input[name="delivery_method"]:checked').value === 'pickup';
+    var shipping = pickup ? 0 : estimatedShipping;
+    document.getElementById('summary-shipping').textContent = shipping > 0 ? ('₦' + shipping.toLocaleString()) : 'Free';
+    document.getElementById('summary-total').textContent = '₦' + (cartSubtotal + shipping).toLocaleString();
+    document.getElementById('delivery-fee-note').textContent = estimatedShipping > 0 ? ('₦' + estimatedShipping.toLocaleString() + ' delivery fee') : 'Free delivery on this order';
+    document.getElementById('delivery-method-label').classList.toggle('border-gold', !pickup);
+    document.getElementById('pickup-method-label').classList.toggle('border-gold', pickup);
+  }
+  document.addEventListener('DOMContentLoaded', updateShippingDisplay);
+
+  function fillSavedAddress(select) {
+    var opt = select.options[select.selectedIndex];
+    if (!opt.value) return;
+    document.getElementById('full_name').value = opt.dataset.name || '';
+    document.getElementById('phone_number').value = opt.dataset.phone || '';
+    document.getElementById('shipping_address').value = opt.dataset.line || '';
+    document.getElementById('city').value = opt.dataset.city || '';
+    document.getElementById('state').value = opt.dataset.state || '';
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    var sel = document.getElementById('saved-address-select');
+    if (sel && sel.value) fillSavedAddress(sel);
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,229 @@
+{% load static %}
+<header id="site-header" class="fixed top-0 inset-x-0 z-40 transition-colors duration-300 bg-charcoal shadow-md text-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 gap-4">
+      <a href="{% url 'catalog:home' %}" class="font-serif text-2xl tracking-[0.12em] flex items-center gap-2 shrink-0">
+        {% if store_settings.logo %}
+          <img src="{{ store_settings.logo.url }}" alt="{{ store_settings.business_name }} logo" class="h-8 w-8 object-contain">
+        {% else %}
+          <span class="w-2 h-2 bg-gold rotate-45 inline-block"></span>
+        {% endif %}
+        {{ store_settings.business_name|default:"ERINAYOMI" }}
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm tracking-wide" aria-label="Primary">
+        <a href="{% url 'catalog:product_list' %}" class="hover:text-gold transition">Shop</a>
+        <a href="{% url 'catalog:home' %}#categories" class="hover:text-gold transition">Categories</a>
+        <a href="{% url 'catalog:tailoring' %}" class="hover:text-gold transition">Tailoring</a>
+        <a href="{% url 'catalog:about' %}" class="hover:text-gold transition">About</a>
+        <a href="{% url 'catalog:contact' %}" class="hover:text-gold transition">Contact</a>
+
+        <button type="button" onclick="openSearchModal()" aria-label="Search" class="hover:text-gold transition">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+
+        <a href="{% url 'wishlist:wishlist' %}" class="relative hover:text-gold transition" aria-label="Wishlist">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 21s-7.5-4.6-10-9.1C.4 8.5 2 4.5 6 4c2.2-.3 4 1 6 3.3C14 5 15.8 3.7 18 4c4 .5 5.6 4.5 4 7.9-2.5 4.5-10 9.1-10 9.1z"/>
+          </svg>
+        </a>
+
+        <a href="{% url 'cart:cart_detail' %}" class="relative hover:text-gold transition" aria-label="Cart, {{ nav_cart.item_count|default:0 }} items">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13L5.4 5M7 13l-2 5h13M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
+          </svg>
+          {% if nav_cart and nav_cart.item_count %}
+          <span class="absolute -top-2 -right-2 bg-gold text-charcoal text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">{{ nav_cart.item_count }}</span>
+          {% endif %}
+        </a>
+
+        {% if user.is_authenticated %}
+        {% if user.is_staff %}<a href="{% url 'store_settings:dashboard' %}" class="hover:text-gold transition">Dashboard</a>{% endif %}
+        
+        <!-- Replaced username text with a sleek profile icon -->
+        <a href="{% url 'accounts:profile' %}" class="hover:text-gold transition flex items-center" title="My Profile" aria-label="My Profile">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+        </a>
+
+        <a href="{% url 'accounts:logout' %}" class="text-white/50 hover:text-gold transition text-xs">Logout</a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-gold !py-2 !px-4">Login</a>
+        {% endif %}
+      </nav>
+
+      <div class="flex items-center gap-3 md:hidden">
+        <button type="button" onclick="openSearchModal()" aria-label="Search" class="p-1">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+        <button type="button" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" class="p-1" onclick="toggleMobileMenu()">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="divider-gold"></div>
+
+  <!-- MOBILE MENU (animated slide-down) -->
+  <div id="mobile-menu" class="md:hidden bg-charcoal border-t border-white/10 transition-all duration-300 max-h-0 overflow-hidden opacity-0">
+    <div class="max-h-[75vh] overflow-y-auto px-4 py-4 space-y-4 pb-28">
+      <a href="{% url 'catalog:product_list' %}" class="block py-1 hover:text-gold">Shop</a>
+      <a href="{% url 'catalog:home' %}#categories" class="block py-1 hover:text-gold">Categories</a>
+      <a href="{% url 'catalog:tailoring' %}" class="block py-1 hover:text-gold">Tailoring</a>
+      <a href="{% url 'catalog:about' %}" class="block py-1 hover:text-gold">About</a>
+      <a href="{% url 'catalog:contact' %}" class="block py-1 hover:text-gold">Contact</a>
+      <a href="{% url 'wishlist:wishlist' %}" class="block py-1 hover:text-gold">Wishlist</a>
+      <a href="{% url 'cart:cart_detail' %}" class="block py-1 hover:text-gold">Cart{% if nav_cart and nav_cart.item_count %} ({{ nav_cart.item_count }}){% endif %}</a>
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}<a href="{% url 'store_settings:dashboard' %}" class="block py-1 hover:text-gold">Dashboard</a>{% endif %}
+      
+      <a href="{% url 'accounts:profile' %}" class="block py-1 hover:text-gold flex items-center gap-2">
+        <svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+        </svg>
+        <span>Profile Account</span>
+      </a>
+
+      <a href="{% url 'accounts:logout' %}" class="block py-1 text-white/50 hover:text-gold transition">Logout</a>
+      {% else %}
+      <a href="{% url 'accounts:login' %}" class="block py-1 hover:text-gold">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+{% if request.resolver_match.url_name != 'home' %}
+<div class="h-16" aria-hidden="true"></div>
+{% endif %}
+
+<!-- SEARCH MODAL -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="search-modal-input">
+  <div class="absolute inset-0 bg-charcoal/70" onclick="closeSearchModal()"></div>
+  <div class="relative max-w-2xl mx-auto mt-24 px-4">
+    <div class="bg-white rounded-lg shadow-luxe overflow-hidden">
+      <div class="flex items-center gap-3 p-4 border-b border-gray-100">
+        <svg class="w-5 h-5 text-gray-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <label for="search-modal-input" class="sr-only">Search products</label>
+        <input id="search-modal-input" type="text" placeholder="Search for rings, watches, accessories…"
+               class="flex-1 outline-none text-sm text-zinc-900 placeholder-gray-400 bg-transparent" autocomplete="off">
+        <button type="button" onclick="closeSearchModal()" aria-label="Close search" class="text-gray-400 hover:text-charcoal">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="search-modal-results" class="max-h-80 overflow-y-auto"></div>
+      <form action="{% url 'catalog:product_list' %}" method="get" class="border-t border-gray-100 p-3">
+        <input type="hidden" name="q" id="search-modal-hidden-q">
+        <button type="submit" onclick="document.getElementById('search-modal-hidden-q').value = document.getElementById('search-modal-input').value"
+                class="w-full text-center text-xs text-gold-dark hover:underline py-1">
+          View all results &rarr;
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMobileMenu() {
+    var menu = document.getElementById('mobile-menu');
+    var btn = document.getElementById('mobile-menu-btn');
+    var isOpen = menu.classList.contains('max-h-0') === false;
+    if (isOpen) {
+      menu.classList.add('max-h-0', 'opacity-0');
+      menu.classList.remove('max-h-[28rem]', 'opacity-100');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      menu.classList.remove('max-h-0', 'opacity-0');
+      menu.classList.add('max-h-[28rem]', 'opacity-100');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function openSearchModal() {
+    document.getElementById('search-modal').classList.remove('hidden');
+    setTimeout(function () { document.getElementById('search-modal-input').focus(); }, 50);
+  }
+  function closeSearchModal() {
+    document.getElementById('search-modal').classList.add('hidden');
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSearchModal();
+  });
+
+  (function () {
+    var input = document.getElementById('search-modal-input');
+    var resultsBox = document.getElementById('search-modal-results');
+    var debounceTimer;
+    input.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      var q = input.value.trim();
+      document.getElementById('search-modal-hidden-q').value = q;
+      if (q.length < 2) { resultsBox.innerHTML = ''; return; }
+      debounceTimer = setTimeout(function () {
+        fetch("{% url 'catalog:search_suggestions' %}?q=" + encodeURIComponent(q))
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            resultsBox.replaceChildren();
+            if (!data.results.length) {
+              var empty = document.createElement('p');
+              empty.className = 'text-sm text-gray-500 p-4';
+              empty.textContent = 'No products found.';
+              resultsBox.appendChild(empty);
+              return;
+            }
+            data.results.forEach(function (p) {
+              var link = document.createElement('a');
+              link.href = p.url;
+              link.className = 'flex items-center gap-3 p-3 hover:bg-soft transition border-b border-gray-50 last:border-0';
+              var media = document.createElement('div');
+              media.className = 'w-12 h-12 rounded bg-soft overflow-hidden shrink-0';
+              if (p.image) {
+                var image = document.createElement('img');
+                image.src = p.image;
+                image.alt = '';
+                image.className = 'w-full h-full object-cover';
+                media.appendChild(image);
+              }
+              var details = document.createElement('div');
+              details.className = 'flex-1 min-w-0';
+              var name = document.createElement('div');
+              name.className = 'text-sm font-medium text-zinc-900 truncate';
+              name.textContent = p.name;
+              var category = document.createElement('div');
+              category.className = 'text-xs text-gray-500';
+              category.textContent = p.category;
+              details.appendChild(name);
+              details.appendChild(category);
+              var price = document.createElement('div');
+              price.className = 'text-sm font-semibold text-zinc-900';
+              price.textContent = p.price;
+              link.appendChild(media);
+              link.appendChild(details);
+              link.appendChild(price);
+              resultsBox.appendChild(link);
+            });
+          })
+          .catch(function () {
+            resultsBox.replaceChildren();
+            var error = document.createElement('p');
+            error.className = 'text-sm text-gray-500 p-4';
+            error.textContent = 'Search is unavailable right now.';
+            resultsBox.appendChild(error);
+          });
+      }, 250);
+    });
+  })();
+
+  (function () {
+    var header = document.getElementById('site-header');
+    if (!header.classList.contains('bg-transparent')) return;
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 80) {
+        header.classList.remove('bg-transparent');
+        header.classList.add('bg-charcoal', 'shadow-md');
+      } else {
+        header.classList.add('bg-transparent');
+        header.classList.remove('bg-charcoal', 'shadow-md');
+      }
+    });
+  })();
+</script>

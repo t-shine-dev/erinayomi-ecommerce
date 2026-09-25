@@ -1,0 +1,22 @@
+{% comment %}Usage: {% include "components/order_tracker.html" with order=order %}{% endcomment %}
+{% if order.status == "cancelled" %}
+<div class="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-200 rounded px-4 py-3">
+  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>
+  This order was cancelled.
+</div>
+{% elif order.status == "pending" %}
+<div class="flex items-center gap-2 text-amber-700 text-sm bg-amber-50 border border-amber-200 rounded px-4 py-3">
+  <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+  Awaiting payment confirmation.
+</div>
+{% else %}
+<div class="flex items-center justify-between">
+  {% include "components/_tracker_step.html" with index=0 label="Confirmed" current=order.tracker_index %}
+  <div class="flex-1 h-0.5 {% if order.tracker_index >= 1 %}bg-gold{% else %}bg-gray-200{% endif %} mx-1"></div>
+  {% include "components/_tracker_step.html" with index=1 label="Processing" current=order.tracker_index %}
+  <div class="flex-1 h-0.5 {% if order.tracker_index >= 2 %}bg-gold{% else %}bg-gray-200{% endif %} mx-1"></div>
+  {% include "components/_tracker_step.html" with index=2 label="Shipped" current=order.tracker_index %}
+  <div class="flex-1 h-0.5 {% if order.tracker_index >= 3 %}bg-gold{% else %}bg-gray-200{% endif %} mx-1"></div>
+  {% include "components/_tracker_step.html" with index=3 label="Delivered" current=order.tracker_index %}
+</div>
+{% endif %}            

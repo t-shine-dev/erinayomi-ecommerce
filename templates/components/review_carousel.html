@@ -1,0 +1,23 @@
+{% comment %}
+Usage: {% include "components/review_carousel.html" with real_reviews=real_reviews %}
+Only catalog reviews are rendered here; no placeholder testimonials are created.
+{% endcomment %}
+{% if real_reviews %}
+<div class="grid gap-4 sm:grid-cols-2">
+  {% for review in real_reviews %}
+  <article class="rounded border border-white/10 bg-white/5 p-7">
+    <div class="mb-4 flex gap-1 text-gold" aria-label="{{ review.rating }} out of 5 stars">
+      {% for i in "12345" %}
+      <svg class="h-4 w-4 {% if forloop.counter <= review.rating %}fill-gold{% else %}fill-white/20{% endif %}" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.44 5.98.7-4.4 4.1 1.16 5.93L10 14.9l-5.34 2.77L5.82 11.7 1.42 7.6l5.98-.7z"/></svg>
+      {% endfor %}
+    </div>
+    <p class="text-sm leading-relaxed text-white/80">“{{ review.comment }}”</p>
+    <p class="mt-6 text-xs text-white/45">{{ review.user.get_full_name|default:review.user.username }} · {{ review.product.name }}</p>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="border border-white/10 bg-white/5 p-7 text-center text-sm text-white/60">
+  Reviews will appear here as customers share their experience.
+</div>
+{% endif %}

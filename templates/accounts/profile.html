@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}My Account — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="max-w-4xl mx-auto px-4 sm:px-6 py-14">
+  <div class="kicker mb-3 text-amber-700 font-semibold">My Account</div>
+  <h1 class="font-serif text-3xl md:text-4xl mb-1 text-white">Hi, {{ user.get_full_name|default:user.username }}</h1>
+  <p class="text-sm text-gray-300 mb-10">{{ user.email }}</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-4 gap-5">
+    <!-- Orders Card -->
+    <a href="{% url 'orders:order_history' %}" class="bg-white text-zinc-900 p-6 rounded-lg shadow transition-transform duration-300 hover:-translate-y-1 block">
+      <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center mb-3 text-amber-800">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>
+      </div>
+      <div class="font-serif text-lg mb-1 text-zinc-900 font-bold">Orders</div>
+      <div class="text-sm text-zinc-600">{{ orders.count }} recent order{{ orders.count|pluralize }}</div>
+    </a>
+
+    <!-- Wishlist Card -->
+    <a href="{% url 'wishlist:wishlist' %}" class="bg-white text-zinc-900 p-6 rounded-lg shadow transition-transform duration-300 hover:-translate-y-1 block">
+      <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center mb-3 text-amber-800">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.1C.4 8.5 2 4.5 6 4c2.2-.3 4 1 6 3.3C14 5 15.8 3.7 18 4c4 .5 5.6 4.5 4 7.9-2.5 4.5-10 9.1-10 9.1z"/></svg>
+      </div>
+      <div class="font-serif text-lg mb-1 text-zinc-900 font-bold">Wishlist</div>
+      <div class="text-sm text-zinc-600">{{ wishlist_count }} saved item{{ wishlist_count|pluralize }}</div>
+    </a>
+
+    <!-- Addresses Card -->
+    <a href="{% url 'accounts:address_book' %}" class="bg-white text-zinc-900 p-6 rounded-lg shadow transition-transform duration-300 hover:-translate-y-1 block">
+      <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center mb-3 text-amber-800">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c-4-4-8-7.5-8-12a8 8 0 1116 0c0 4.5-4 8-8 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
+      <div class="font-serif text-lg mb-1 text-zinc-900 font-bold">Addresses</div>
+      <div class="text-sm text-zinc-600">Saved delivery addresses</div>
+    </a>
+
+    <!-- Settings Card -->
+    <a href="{% url 'accounts:profile_settings' %}" class="bg-white text-zinc-900 p-6 rounded-lg shadow transition-transform duration-300 hover:-translate-y-1 block">
+      <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center mb-3 text-amber-800">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1h.1a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+      </div>
+      <div class="font-serif text-lg mb-1 text-zinc-900 font-bold">Settings</div>
+      <div class="text-sm text-zinc-600">Edit profile &amp; password</div>
+    </a>
+  </div>
+
+  {% if orders %}
+  <div class="mt-12">
+    <h2 class="font-serif text-xl mb-4 text-white">Recent Orders</h2>
+    <div class="bg-white rounded-lg shadow divide-y divide-gray-100 text-zinc-900">
+      {% for order in orders|slice:":5" %}
+      <a href="{% url 'orders:order_detail' order.order_number %}" class="flex items-center justify-between py-3 px-5 hover:bg-gray-50 transition text-sm text-zinc-900">
+        <span class="font-medium text-zinc-900">{{ order.order_number }}</span>
+        <span class="badge {% if order.status == 'paid' %}badge-new{% else %}badge-outline text-zinc-800 border-zinc-400{% endif %}">{{ order.get_status_display }}</span>
+        <span class="font-semibold text-zinc-900">₦{{ order.total|floatformat:0 }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

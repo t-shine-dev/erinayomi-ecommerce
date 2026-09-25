@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Wishlist — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-14">
+  <div class="kicker mb-3">Saved for Later</div>
+  <h1 class="font-serif text-3xl md:text-4xl mb-10">Your Wishlist</h1>
+
+  {% if items %}
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    {% for item in items %}{% include "components/product_card.html" with product=item.product %}{% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center py-20 card-surface">
+    <div class="w-16 h-16 mx-auto rounded-full bg-soft flex items-center justify-center mb-5 text-gold-dark">
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.1C.4 8.5 2 4.5 6 4c2.2-.3 4 1 6 3.3C14 5 15.8 3.7 18 4c4 .5 5.6 4.5 4 7.9-2.5 4.5-10 9.1-10 9.1z"/></svg>
+    </div>
+    <p class="font-serif text-xl mb-2">Nothing saved yet</p>
+    <p class="text-sm text-gray-500 mb-6">Tap the heart on any product to save it here.</p>
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Browse Products</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

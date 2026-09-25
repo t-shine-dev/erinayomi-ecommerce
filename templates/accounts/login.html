@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Log In — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+{% block content %}
+<section class="max-w-md mx-auto px-4 sm:px-6 py-20">
+  <div class="text-center mb-8 reveal">
+    <div class="kicker justify-center mb-3">Welcome Back</div>
+    <h1 class="font-serif text-3xl">Log In</h1>
+  </div>
+  <div class="card-surface p-8">
+    <form method="post" data-loading-submit novalidate class="space-y-4">
+      {% csrf_token %}
+      {% for field in form %}
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="field-label mb-0" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        </div>
+        
+        {% if field.name == 'password' %}
+        <!-- Password field with toggle eye button -->
+        <div class="relative">
+          <div class="[&>input]:block [&>input]:w-full [&>input]:h-11 [&>input]:px-3 [&>input]:py-2 [&>input]:pr-10 [&>input]:border [&>input]:border-gray-300 [&>input]:rounded-md [&>input]:bg-white [&>input]:text-charcoal">
+            {{ field }}
+          </div>
+          <button type="button" onclick="togglePasswordVisibility()" 
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-zinc-800 focus:outline-none"
+                  aria-label="Toggle password visibility">
+            <!-- Eye Icon (Open) -->
+            <svg id="eye-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <!-- Eye Slash Icon (Closed) -->
+            <svg id="eye-icon-closed" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+            </svg>
+          </button>
+        </div>
+        {% else %}
+        <!-- Standard fields (like email/username) -->
+        <div class="[&>input]:block [&>input]:w-full [&>input]:h-11 [&>input]:px-3 [&>input]:py-2 [&>input]:border [&>input]:border-gray-300 [&>input]:rounded-md [&>input]:bg-white [&>input]:text-charcoal">
+          {{ field }}
+        </div>
+        {% endif %}
+
+        {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+      </div>
+      {% endfor %}
+
+      <!-- Staff Login Checkbox -->
+      <div class="flex items-center space-x-2 pt-2">
+        <input type="checkbox" name="is_staff_login" id="is_staff_login" class="h-4 w-4 rounded border-gray-300 text-gold focus:ring-gold">
+        <label for="is_staff_login" class="text-sm font-medium text-gray-700 cursor-pointer select-none">
+          Login as Staff
+        </label>
+      </div>
+
+      {% if form.non_field_errors %}
+      <p class="field-error">{{ form.non_field_errors|join:" " }}</p>
+      {% endif %}
+
+      <button type="submit" data-submit-btn data-loading-text="Logging in…" class="btn btn-primary w-full !py-3.5">Log In</button>
+
+      <!-- Forgot Password Link placed right under the Log In button -->
+      <div class="text-center pt-1">
+        <a href="{% url 'accounts:password_reset' %}" class="text-xs text-gold-dark hover:underline font-medium">Forgot password?</a>
+      </div>
+    </form>
+  </div>
+  <div class="text-center mt-6 space-y-2">
+    <p class="text-sm text-gray-500">
+      New here? <a href="{% url 'accounts:register' %}" class="text-gold-dark hover:underline">Create an account</a>
+    </p>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('id_password');
+    const eyeOpen = document.getElementById('eye-icon-open');
+    const eyeClosed = document.getElementById('eye-icon-closed');
+
+    if (!passwordInput) return;
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeOpen.classList.add('hidden');
+      eyeClosed.classList.remove('hidden');
+    } else {
+      passwordInput.type = 'password';
+      eyeOpen.classList.remove('hidden');
+      eyeClosed.classList.add('hidden');
+    }
+  }
+</script>
+{% endblock %}

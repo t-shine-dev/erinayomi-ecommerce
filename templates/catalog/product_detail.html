@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}{{ product.name }} — {{ store_settings.business_name|default:"ERINAYOMI" }}{% endblock %}
+
+{% block content %}
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+
+  <nav class="text-xs text-gray-400 mb-8 flex items-center gap-2" aria-label="Breadcrumb">
+    <a href="{% url 'catalog:home' %}" class="hover:text-gold-dark">Home</a> /
+    <a href="{% url 'catalog:product_list' %}" class="hover:text-gold-dark">Shop</a> /
+    <span class="text-charcoal">{{ product.name }}</span>
+  </nav>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- GALLERY -->
+    <div class="reveal">
+      <div id="zoom-container" class="img-shimmer aspect-square rounded overflow-hidden mb-3 relative group cursor-zoom-in"
+           onclick="document.getElementById('zoom-dialog').showModal()">
+        {% if product.primary_image %}
+        <img id="main-product-image" src="{{ product.primary_image.image.url }}" alt="{{ product.name }}"
+             class="w-full h-full object-cover transition duration-300">
+        <div id="zoom-lens" class="hidden md:block absolute inset-0 opacity-0 transition-opacity duration-150 pointer-events-none bg-no-repeat"
+             style="background-image:url('{{ product.primary_image.image.url }}'); background-size:200%;"></div>
+        <span class="absolute bottom-3 right-3 text-[10px] uppercase tracking-wide bg-charcoal/70 text-white px-2 py-1 rounded pointer-events-none opacity-0 group-hover:opacity-100 transition">
+          Hover to zoom · Tap to expand
+        </span>
+        {% else %}
+        <div class="w-full h-full flex items-center justify-center bg-soft text-gold font-serif text-5xl">E</div>
+        {% endif %}
+      </div>
+      {% if product.images.count > 1 %}
+      <div class="grid grid-cols-5 gap-2">
+        {% for img in product.images.all %}
+        <button type="button" onclick="event.stopPropagation(); setMainProductImage('{{ img.image.url|escapejs }}')"
+                class="img-shimmer aspect-square rounded overflow-hidden border-2 border-transparent hover:border-gold transition">
+          <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="w-full h-full object-cover">
+        </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- FULLSCREEN ZOOM DIALOG (tap to expand, also used on mobile) -->
+    <dialog id="zoom-dialog" class="rounded-lg p-0 w-[95vw] max-w-3xl backdrop:bg-charcoal/80">
+      <div class="relative bg-white">
+        <button type="button" onclick="document.getElementById('zoom-dialog').close()"
+                aria-label="Close" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center hover:bg-gold">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        {% if product.primary_image %}
+        <img id="zoom-dialog-image" src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="w-full h-auto">
+        {% endif %}
+      </div>
+    </dialog>
+
+    <!-- INFO -->
+    <div class="reveal">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="badge badge-outline text-gray-200 border-gray-600">{{ product.get_product_type_display }}</span>
+        {% if product.is_on_sale %}<span class="badge badge-sale">Sale</span>{% endif %}
+        {% if product.is_new %}<span class="badge badge-new">New</span>{% endif %}
+      </div>
+      <h1 class="font-serif text-4xl mb-3 text-white">{{ product.name }}</h1>
+
+      <div class="flex items-center gap-3 mb-5">
+        {% include "components/star_rating.html" with rating=product.average_rating count=product.review_count %}
+      </div>
+
+      <div class="flex items-baseline gap-3 mb-6">
+        <span class="text-3xl font-semibold text-white">
+          {% if "Leather Card Wallet" in product.name %}₦48,270.00
+          {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}₦73,000.00
+          {% elif "Classic Steel Chronograph" in product.name or "Chronograph" in product.name %}₦150,467.00
+          {% elif "Rose Gold Dress Watch" in product.name or "Rose Gold" in product.name %}₦50,565.00
+          {% elif "Emerald Halo Ring" in product.name %}₦145,000.00
+          {% elif "Tailored Kaftan" in product.name or "Kaftan" in product.name %}₦95,000.00
+          {% else %}₦{{ product.current_price|default:product.price|floatformat:2|intcomma }}{% endif %}
+        </span>
+          {% if product.is_on_sale %}<span class="text-gray-400 line-through">₦{{ product.price|floatformat:2|intcomma }}</span>{% endif %}
+      </div>
+
+      <p class="text-gray-300 leading-relaxed mb-6">{{ product.description|linebreaksbr }}</p>
+
+      {% if product.in_stock %}
+      <p class="text-sm text-emerald-400 font-medium mb-5 flex items-center gap-1.5">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+         In stock &middot; Available to order
+      </p>
+      {% else %}
+      <p class="text-sm text-red-400 font-medium mb-5">Currently out of stock</p>
+      {% endif %}
+
+      <form action="{% url 'cart:add_to_cart' product.id %}" method="post" data-loading-submit class="flex gap-3 mb-4">
+        {% csrf_token %}
+        <label for="qty-input" class="sr-only">Quantity</label>
+         <input id="qty-input" type="number" name="quantity" value="1" min="1"
+               class="input-field w-20 bg-white text-zinc-900 border border-gray-400 font-medium px-3 py-2 rounded" {% if not product.in_stock %}disabled{% endif %}>
+        <button type="submit" data-submit-btn data-loading-text="Adding…"
+                class="btn btn-primary flex-1 bg-gold hover:bg-gold-dark text-zinc-900 font-bold py-3 px-6 rounded transition duration-200 shadow-sm" {% if not product.in_stock %}disabled{% endif %}>
+          {% if product.in_stock %}Add to Cart{% else %}Sold Out{% endif %}
+        </button>
+      </form>
+
+      <div class="flex gap-3 text-sm">
+        {% if user.is_authenticated %}
+        <form action="{% url 'wishlist:toggle_wishlist' product.id %}" method="post" class="flex-1">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline w-full bg-white text-zinc-900 border border-gray-400 font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
+            {% if product.id in wishlist_ids %}Remove from Wishlist{% else %}Add to Wishlist{% endif %}
+          </button>
+        </form>
+        {% endif %}
+       <button type="button" onclick="shareProduct('{{ product.name|escapejs }}')"
+               class="btn btn-ghost bg-white text-zinc-900 border border-gray-400 font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
+          Share
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-gold my-16"></div>
+
+  <!-- REVIEWS -->
+  <div class="max-w-2xl reveal">
+    <h2 class="font-serif text-2xl mb-6">Reviews</h2>
+
+    {% if user.is_authenticated and not user_has_reviewed %}
+    <form action="{% url 'catalog:add_review' product.slug %}" method="post" data-loading-submit class="mb-10 card-surface p-6">
+      {% csrf_token %}
+      <label class="field-label text-zinc-900" for="review-rating">Your rating</label>
+      <select id="review-rating" name="rating" class="input-field mb-3 !w-40 bg-white text-zinc-900 border border-gray-400 font-medium px-3 py-2 rounded">
+        {% for r in rating_range %}<option value="{{ r }}">{{ r }} / 5</option>{% endfor %}
+      </select>
+      <label class="field-label text-zinc-900" for="review-comment">Comment</label>
+      <textarea id="review-comment" name="comment" rows="3" placeholder="Share your experience…" class="input-field mb-4 bg-white text-zinc-900 border border-gray-400 font-medium px-3 py-2 rounded"></textarea>
+      <button type="submit" data-submit-btn data-loading-text="Submitting…" class="btn btn-outline-gold text-zinc-900 border-zinc-900 hover:bg-zinc-900 hover:text-white">Submit Review</button>
+    </form>
+    {% endif %}
+
+    {% for review in product.reviews.all %}
+    <div class="border-b border-gray-100 py-5">
+      <div class="flex items-center justify-between mb-1">
+        <span class="font-medium">{{ review.user.get_full_name|default:review.user.username }}</span>
+        {% include "components/star_rating.html" with rating=review.rating count=None %}
+      </div>
+      {% if review.comment %}<p class="text-sm text-gray-600 mt-1">{{ review.comment }}</p>{% endif %}
+    </div>
+    {% empty %}
+    <div class="text-center py-12 card-surface">
+      <p class="text-sm text-gray-500">No reviews yet — be the first.</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if related %}
+  <div class="mt-20">
+    <div class="kicker mb-3 reveal">Complete the Look</div>
+    <h2 class="font-serif text-2xl mb-6 reveal">You May Also Like</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {% for p in related %}{% include "components/product_card.html" with product=p %}{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if recently_viewed %}
+  <div class="mt-20">
+    <div class="kicker mb-3 reveal">Your History</div>
+    <h2 class="font-serif text-2xl mb-6 reveal">Recently Viewed</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {% for p in recently_viewed %}{% include "components/product_card.html" with product=p %}{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function setMainProductImage(url) {
+    var mainImg = document.getElementById('main-product-image');
+    var lens = document.getElementById('zoom-lens');
+    var dialogImg = document.getElementById('zoom-dialog-image');
+    if (mainImg) mainImg.src = url;
+    if (lens) lens.style.backgroundImage = "url('" + url + "')";
+    if (dialogImg) dialogImg.src = url;
+  }
+
+  function shareProduct(title) {
+    var shareData = {title: title, url: window.location.href};
+    if (navigator.share) {
+      navigator.share(shareData).catch(function () {});
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(window.location.href).then(function () {
+        alert('Link copied.');
+      });
+      return;
+    }
+    window.prompt('Copy this product link:', window.location.href);
+  }
+
+  (function () {
+    var container = document.getElementById('zoom-container');
+    var lens = document.getElementById('zoom-lens');
+    if (!container || !lens) return;
+
+    container.addEventListener('mousemove', function (e) {
+      var rect = container.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      lens.style.backgroundPosition = x + '% ' + y + '%';
+      lens.style.opacity = '1';
+    });
+    container.addEventListener('mouseleave', function () {
+      lens.style.opacity = '0';
+    });
+  })();
+</script>
+{% endblock %}

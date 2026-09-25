@@ -1,0 +1,121 @@
+{% comment %}
+Usage: {% include "components/product_card.html" with product=product %}
+{% endcomment %}
+{% load humanize %}
+<div class="group card-surface overflow-hidden reveal bg-[#171717] flex flex-col justify-between h-full">
+  <div>
+    <!-- Product Image Container -->
+    <div class="group/img relative img-shimmer aspect-square max-h-[260px] overflow-hidden bg-[#262626] mx-auto w-full">
+      <a href="{{ product.get_absolute_url }}" class="block w-full h-full" aria-label="View {{ product.name }}">
+        {% if "Leather Card Wallet" in product.name %}
+          <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-center transition duration-500 ease-out group-hover/img:scale-105">
+        {% elif "Tailored Kaftan" in product.name or "Kaftan" in product.name %}
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-contain object-center bg-white p-2 transition duration-500 ease-out group-hover/img:scale-105">
+        {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}
+          <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJh9gVavR7PJ3iso9mFGmcuflC8h1m-ZqGucmPZKg0IquGt1B1Q8iZrvrI2jKTJX6dBJdJnSzVPnMVlBnfhFUqsj5ykQKR4RWWsjBp36r69hQ9EobnMUfX&usqp=CAc" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-contain object-center bg-white p-2 transition duration-500 ease-out group-hover/img:scale-105">
+        {% elif "Rose Gold Dress Watch" in product.name or "Rose Gold" in product.name %}
+          <img src="/media/products/rosegold-watch.jpg" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-center transition duration-500 ease-out group-hover/img:scale-105">
+        {% elif "Classic Steel Chronograph" in product.name or "Chronograph" in product.name %}
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-center transition duration-500 ease-out group-hover/img:scale-105">
+        {% elif "Emerald Halo Ring" in product.name %}
+          <img src="/media/products/emaral.jpg" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-center transition duration-500 ease-out group-hover/img:scale-105">
+        {% elif product.primary_image %}
+          <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-center transition duration-500 ease-out group-hover/img:scale-105">
+        {% else %}
+          <div class="w-full h-full flex items-center justify-center bg-soft text-gold font-serif text-4xl">{{ product.name|slice:":1" }}</div>
+        {% endif %}
+      </a>
+      <div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10 pointer-events-none">
+        {% if product.is_on_sale %}<span class="badge badge-sale">-{{ product.discount_percent }}%</span>{% endif %}
+        {% if product.is_new %}<span class="badge badge-new">New</span>{% endif %}
+      </div>
+      {% if user.is_authenticated %}
+      <form action="{% url 'wishlist:toggle_wishlist' product.id %}" method="post" class="absolute top-2.5 right-2.5 z-25 opacity-100 sm:opacity-0 sm:group-hover/img:opacity-100 transition">
+        {% csrf_token %}
+        <button type="submit" aria-label="Toggle wishlist for {{ product.name }}" class="w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-gold">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="{% if product.id in wishlist_ids %}#D4AF37{% else %}none{% endif %}" stroke="#111827" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 21s-7.5-4.6-10-9.1C.4 8.5 2 4.5 6 4c2.2-.3 4 1 6 3.3C14 5 15.8 3.7 18 4c4 .5 5.6 4.5 4 7.9-2.5 4.5-10 9.1-10 9.1z"/>
+          </svg>
+        </button>
+      </form>
+      {% endif %}
+      <button type="button" onclick="document.getElementById('qv-{{ product.id }}').showModal()" class="absolute inset-x-2.5 bottom-2.5 z-20 btn btn-primary !py-1.5 !text-[10px] w-[calc(100%-1.25rem)] opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">Quick View</button>
+    </div>
+  </div>
+  <!-- Product Information -->
+  <div class="p-3.5 bg-[#171717] border-t border-white/5 flex flex-col justify-between flex-1">
+    <div>
+      <div class="text-[10px] tracking-[0.15em] uppercase text-gold-dark mb-0.5 font-semibold">{{ product.get_product_type_display }}</div>
+      <a href="{{ product.get_absolute_url }}" class="block font-serif text-sm text-white hover:text-gold-dark transition-colors truncate">{{ product.name }}</a>
+      {% include "components/star_rating.html" with rating=product.average_rating count=None %}
+      <div class="mt-1.5 flex items-baseline gap-2">
+        <span class="font-semibold text-white text-sm">
+          {% if "Leather Card Wallet" in product.name %}₦48,270.00
+          {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}₦73,000.00
+          {% elif "Classic Steel Chronograph" in product.name or "Chronograph" in product.name %}₦150,467.00
+          {% elif "Rose Gold Dress Watch" in product.name or "Rose Gold" in product.name %}₦50,565.00
+          {% elif "Emerald Halo Ring" in product.name %}₦145,000.00
+          {% elif "Tailored Kaftan" in product.name or "Kaftan" in product.name %}₦95,000.00
+          {% else %}₦{{ product.current_price|floatformat:2 }}{% endif %}
+        </span>
+        {% if product.is_on_sale %}<span class="text-xs text-gray-400 line-through">₦{{ product.price|floatformat:2 }}</span>{% endif %}
+      </div>
+    </div>
+    <!-- Permanent Add to Cart Form -->
+    <form action="{% url 'cart:add_to_cart' product.id %}" method="post" class="mt-3 w-full block">
+      {% csrf_token %}
+      <input type="hidden" name="quantity" value="1">
+      <button type="submit" {% if not product.in_stock %}disabled{% endif %} class="w-full py-2 bg-transparent border border-[#c7a24b] text-white text-[10px] uppercase tracking-widest cursor-pointer rounded transition-all duration-300 hover:bg-[#c7a24b] hover:text-black">
+        {% if product.in_stock %}Add to Cart{% else %}Sold Out{% endif %}
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<dialog id="qv-{{ product.id }}" class="rounded-lg p-0 w-[92vw] max-w-2xl backdrop:bg-charcoal/60">
+  <div class="grid grid-cols-1 sm:grid-cols-2">
+    <div class="relative aspect-square bg-[#262626] overflow-hidden">
+      {% if "Leather Card Wallet" in product.name %}
+        <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-cover">
+      {% elif "Tailored Kaftan" in product.name or "Kaftan" in product.name %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-contain object-center bg-white p-2">
+      {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}
+        <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJh9gVavR7PJ3iso9mFGmcuflC8h1m-ZqGucmPZKg0IquGt1B1Q8iZrvrI2jKTJX6dBJdJnSzVPnMVlBnfhFUqsj5ykQKR4RWWsjBp36r69hQ9EobnMUfX&usqp=CAc" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-contain object-center bg-white p-2">
+      {% elif "Rose Gold Dress Watch" in product.name or "Rose Gold" in product.name %}
+        <img src="/media/products/rosegold-watch.jpg" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-cover">
+      {% elif "Classic Steel Chronograph" in product.name or "Chronograph" in product.name %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-cover">
+      {% elif "Emerald Halo Ring" in product.name %}
+        <img src="/media/products/emaral.jpg" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-cover">
+      {% elif product.primary_image %}
+        <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="absolute inset-0 h-full w-full object-cover">
+      {% endif %}
+    </div>
+    <div class="p-6 relative bg-[#171717] text-white">
+      <button type="button" onclick="document.getElementById('qv-{{ product.id }}').close()" aria-label="Close quick view" class="absolute top-3 right-3 btn-ghost text-lg leading-none">&times;</button>
+      <div class="text-[10px] tracking-[0.15em] uppercase text-gold-dark mb-1 font-semibold">{{ product.get_product_type_display }}</div>
+      <h3 class="font-serif text-2xl mb-2">{{ product.name }}</h3>
+      {% include "components/star_rating.html" with rating=product.average_rating count=product.review_count %}
+      <div class="mt-3 mb-1 flex items-baseline gap-2">
+        <span class="text-xl font-semibold">
+          {% if "Leather Card Wallet" in product.name %}₦48,270.00
+          {% elif "Bespoke Agbada" in product.name or "Agbada" in product.name %}₦73,000.00
+          {% elif "Classic Steel Chronograph" in product.name or "Chronograph" in product.name %}₦150,467.00
+          {% elif "Rose Gold Dress Watch" in product.name or "Rose Gold" in product.name %}₦50,565.00
+          {% elif "Emerald Halo Ring" in product.name %}₦145,000.00
+          {% elif "Tailored Kaftan" in product.name or "Kaftan" in product.name %}₦95,000.00
+          {% else %}₦{{ product.current_price|floatformat:2 }}{% endif %}
+        </span>
+        {% if product.is_on_sale %}<span class="text-sm text-gray-400 line-through">₦{{ product.price|floatformat:2 }}</span>{% endif %}
+      </div>
+      <p class="text-xs mb-4 {% if product.in_stock %}text-emerald-500{% else %}text-red-500{% endif %}">
+        {% if product.in_stock %}Available to order{% else %}Out of stock{% endif %}
+      </p>
+      <p class="text-sm text-gray-300 leading-relaxed mb-5 line-clamp-4">{{ product.description }}</p>
+      <div class="flex gap-3">
+        <a href="{{ product.get_absolute_url }}" class="btn btn-primary flex-1">View Full Details</a>
+      </div>
+    </div>
+  </div>
+</dialog>
