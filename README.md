@@ -113,6 +113,8 @@ These settings can then be displayed throughout the storefront.
 ### Frontend
 - **HTML5**
 - **Tailwind CSS**
+- **Bootstrap**
+- **CSS**
 - **JavaScript**
 - **Fetch API**
 - Responsive design
