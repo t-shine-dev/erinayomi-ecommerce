@@ -21,7 +21,6 @@ USE_CLOUDINARY = config("USE_CLOUDINARY", default=False, cast=bool)
 # Applications
 # --------------------------------------------------------------------------
 INSTALLED_APPS = [
-    "cloudinary_storage",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +37,8 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
+    # Cloudinary apps
+    "cloudinary_storage",
     "cloudinary",
 ]
 
