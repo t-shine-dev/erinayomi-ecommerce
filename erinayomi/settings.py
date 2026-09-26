@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
-    # Cloudinary core app
-    "cloudinary",
 ]
 
 if USE_CLOUDINARY:
@@ -125,16 +123,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 
 if USE_CLOUDINARY:
     import cloudinary
     cloudinary.config(
         cloudinary_url=config("CLOUDINARY_URL", default="")
     )
-    # Use standard default file storage or let cloudinary handle uploads via models
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-else:
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
