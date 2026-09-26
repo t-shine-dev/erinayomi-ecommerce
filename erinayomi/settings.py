@@ -37,12 +37,11 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
-    # Cloudinary Storage integration
-    "cloudinary_storage",
 ]
 
+# Conditionally add Cloudinary storage packages only once if enabled
 if USE_CLOUDINARY:
-    INSTALLED_APPS = ["cloudinary_storage"] + INSTALLED_APPS + ["cloudinary"]
+    INSTALLED_APPS += ["cloudinary_storage", "cloudinary"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
