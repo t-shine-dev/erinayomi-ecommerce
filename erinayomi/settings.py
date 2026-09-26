@@ -21,6 +21,7 @@ USE_CLOUDINARY = config("USE_CLOUDINARY", default=False, cast=bool)
 # Applications
 # --------------------------------------------------------------------------
 INSTALLED_APPS = [
+    "cloudinary_storage",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
+    "cloudinary",
 ]
 
 if USE_CLOUDINARY:
@@ -119,13 +121,16 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+CLOUDINARY_STORAGE = {"CLOUDINARY_URL": config("CLOUDINARY_URL", default="")}
+
 if USE_CLOUDINARY:
-    CLOUDINARY_STORAGE = {"CLOUDINARY_URL": config("CLOUDINARY_URL", default="")}
-    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
