@@ -37,9 +37,8 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
-    # Cloudinary apps
+    # Cloudinary Storage integration
     "cloudinary_storage",
-    "cloudinary",
 ]
 
 if USE_CLOUDINARY:
