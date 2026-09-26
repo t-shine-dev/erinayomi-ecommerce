@@ -123,7 +123,16 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = "/media/"
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+# Django 5.0+ modern STORAGES configuration supporting Cloudinary
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage" if USE_CLOUDINARY else "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 
 CLOUDINARY_STORAGE = {
     "CLOUDINARY_URL": config("CLOUDINARY_URL", default="")
@@ -188,8 +197,6 @@ MESSAGE_TAGS = {
 # --------------------------------------------------------------------------
 # Django REST Framework
 # --------------------------------------------------------------------------
-# The API initially uses the same Django session authentication as the
-# server-rendered storefront. No token tables or JWT layer are introduced.
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
