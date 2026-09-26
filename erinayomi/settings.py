@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
-    # Cloudinary storage
+    # Cloudinary
     "cloudinary_storage",
     "cloudinary",
 ]
