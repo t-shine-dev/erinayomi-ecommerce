@@ -48,6 +48,7 @@
 {% endwith %}
 
 <!-- 02 / CATEGORY DISCOVERY -->
+<!-- 02 / CATEGORY DISCOVERY -->
 {% if categories %}
 <section id="categories" class="bg-soft py-20 sm:py-32">
   <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
@@ -63,19 +64,15 @@
       {% for category in categories %}
       <a href="{% url 'catalog:product_list' %}?category={{ category.slug }}" class="category-card group rounded-sm reveal block overflow-hidden relative" style="min-height: 22rem;">
         
-        {% if category.slug == 'accessories' %}
-        <img src="/media/products/accessories.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
-        {% elif category.slug == 'rings' %}
-        <img src="/media/products/ringss.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
-        {% elif category.slug == 'tailoring' %}
-        <img src="/media/products/tailoring.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
-        {% elif category.slug == 'watches' %}
-        <img src="/media/products/watch.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
-        {% else %}
-        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
-          <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
-        </div>
-        {% endif %}
+        {% with first_product=category.products.first %}
+          {% if first_product and first_product.primary_image %}
+          <img src="{{ first_product.primary_image.image.url }}" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+          {% else %}
+          <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
+            <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
+          </div>
+          {% endif %}
+        {% endwith %}
 
         <div class="absolute inset-0 bg-gradient-to-t from-[#171717] via-[#171717]/30 to-transparent"></div>
         <span class="absolute bottom-6 left-6 z-10 right-6 flex items-end justify-between gap-2">

@@ -1,0 +1,1520 @@
+[
+{
+    "model": "sessions.session",
+    "pk": "6wju0vdztcyj6fqdcybokqilsbq0ee58",
+    "fields": {
+        "session_data": "eyJyZWNlbnRseV92aWV3ZWRfcHJvZHVjdF9pZHMiOlszXX0:1x9dC5:z6n-ZjLErsqh7E8-7vT4Km2h2uSKIwicDR5d2U6gwWw",
+        "expire_date": "2026-10-08T06:44:33.276Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "7czxczadfw8ay9cdsgwb7sjxrv93jhlk",
+    "fields": {
+        "session_data": ".eJxVjMsOgjAQAP9lz6ahlL44evcbmt3tIqhpEwon478bEg56nZnMGxLu25z2JmtaMoyg4fLLCPkp5RD5geVeFdeyrQupI1GnbepWs7yuZ_s3mLHNMIJBr7m3loLrpyyGmXTkEE3souumMOhsBoneOyLjpEPqtRe2mC0NU2D4fAHcLjgK:1xAOhE:lkwt89xLEpocgaIjT_iIdfZir8MwNCJy34v50eXR_gg",
+        "expire_date": "2026-10-10T09:27:52.330Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "fvw45zvlllpyxdsgekmjshehjut172q3",
+    "fields": {
+        "session_data": ".eJxVjLsOwjAMAP_FM4rSNHGbjux8Q2THLi2gROpjQvw7qtQB1rvTvSHRvk1pX3VJs8AATQeXX8iUn1oOIw8q92pyLdsyszkSc9rV3Kro63q2f4OJ1gkGwB6jtRSa2KD3TskFyWrZSvYBLXGnmKOokHcdalD03GLfOmLMOI7w-QL3UDg0:1x4H63:z2N4QtuzEPJtcu7-v6MLZ9WhAUBqEaWg_LrkGBJM3wM",
+        "expire_date": "2026-09-23T12:08:11.050Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "tc26ac8shj0tlera83bwd4je7jjz86up",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQAP-yZ0MWENj26L1vaBZYpGrapLQn499Nkx70OjOZN4y8b3Xcm6zjlKEHDZdfFjk9ZT5EfvB8X1Ra5m2dojoSddqmhiXL63a2f4PKrUIPnbUYChaSq7B3RlzQnSBrdJESFfZivc1ssJCJoWQSHShhzB5NIA2fL9pGN6U:1x3tBo:2ULhq1MOXW4EHVJVxK5l0YH3Kx5CBpxaEfFF51eUc-E",
+        "expire_date": "2026-09-22T10:36:32.575Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "vey84b19w1jxgavgdhzfbep2389il3l9",
+    "fields": {
+        "session_data": "eyJyZWNlbnRseV92aWV3ZWRfcHJvZHVjdF9pZHMiOlszXX0:1x9dGj:KWpebcOOqBFx02h_-Ic-yqQAi4coB_Gm5r8tE9DmJ54",
+        "expire_date": "2026-10-08T06:49:21.390Z"
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$720000$zlTHXpsvKhoRHhmoRjWrF1$Sk58UdM7P8S5JRwpNfJcP1x0DvXwHgkt9Ku3NIan7cE=",
+        "last_login": "2026-09-26T09:27:52.325Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-08T09:43:24.670Z",
+        "username": "T_Shine",
+        "email": "tshine@gmail.com",
+        "phone_number": "",
+        "address": "",
+        "created_at": "2026-09-08T09:43:25.062Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$kNkiFGW9JW27oNYLWU6Pbh$f16LH+Tom+0h8pdZq26FiIw/pyyjJHLd7a9Y4kvzcyI=",
+        "last_login": "2026-09-08T10:59:50.620Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-09-08T10:29:58.166Z",
+        "username": "Femi",
+        "email": "femi5@gmail.com",
+        "phone_number": "123456789",
+        "address": "",
+        "created_at": "2026-09-08T10:30:00.015Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$gMThf2Ycrr8BNuPt4eUtMg$i+dRQXQ6XEtZZkjMOXXb9jjbbA2GHyKgbt44/KDG+8E=",
+        "last_login": "2026-09-09T08:37:34.341Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-09-09T08:35:09.958Z",
+        "username": "Promise",
+        "email": "Akumapromise45@gmail.com",
+        "phone_number": "+2349167425125",
+        "address": "",
+        "created_at": "2026-09-09T08:35:11.600Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$K34EG9SbKKrJwYaMxQdXqf$JiBNdmHfqRGKafO2fVMaLTtoQIe9JL6lacYBkmnoLfk=",
+        "last_login": "2026-09-09T11:49:54.030Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-09-09T11:47:32.512Z",
+        "username": "Eniola",
+        "email": "temitopeebenezer47@gmail.com",
+        "phone_number": "+2348161215581",
+        "address": "",
+        "created_at": "2026-09-09T11:47:34.327Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ugG5wndaJcwWib3qWelrjx$kniBm9Knr6MosTz/e+UrrcYdet243ciEGClDBmjkPJg=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": false,
+        "date_joined": "2026-09-09T12:02:46.155Z",
+        "username": "Bukola",
+        "email": "tshine311@gmail.com",
+        "phone_number": "+2348161215581",
+        "address": "",
+        "created_at": "2026-09-09T12:02:48.107Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$720000$VDEEijqtcRpS91rCpxHpDu$9sjiSQyqpx7SxMRvxFrfsAcWIrtmpZIeQGNjCmEfbnA=",
+        "last_login": "2026-09-24T13:17:38.838Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-09T12:07:17.341Z",
+        "username": "Temmy",
+        "email": "annjess005@gmail.com",
+        "phone_number": "+2348161215581",
+        "address": "",
+        "created_at": "2026-09-09T12:07:18.934Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ccYBLjyF0zD2S2LGTOMECl$lMYHTBZcbNczw+LPYJFbc+SBYoJFtBJiS43bqfaPWOk=",
+        "last_login": "2026-09-10T16:54:10.766Z",
+        "is_superuser": false,
+        "first_name": "DAVID",
+        "last_name": "OLAWUMI",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-09-10T16:53:27.860Z",
+        "username": "pokidodeborah",
+        "email": "pokidodeborah@gmail.com",
+        "phone_number": "+234704 484 2590",
+        "address": "",
+        "created_at": "2026-09-10T16:53:29.523Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "Akumapromise45@gmail.com"
+        ],
+        "email": "Akumapromise45@gmail.com",
+        "code": "362720",
+        "created_at": "2026-09-09T08:35:11.606Z",
+        "is_verified": true
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 11,
+    "fields": {
+        "user": [
+            "temitopeebenezer47@gmail.com"
+        ],
+        "email": "temitopeebenezer47@gmail.com",
+        "code": "139853",
+        "created_at": "2026-09-09T11:47:34.333Z",
+        "is_verified": true
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 14,
+    "fields": {
+        "user": [
+            "tshine311@gmail.com"
+        ],
+        "email": "tshine311@gmail.com",
+        "code": "745566",
+        "created_at": "2026-09-09T12:02:48.113Z",
+        "is_verified": false
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 15,
+    "fields": {
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "email": "annjess005@gmail.com",
+        "code": "283362",
+        "created_at": "2026-09-09T12:07:18.939Z",
+        "is_verified": true
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 16,
+    "fields": {
+        "user": [
+            "pokidodeborah@gmail.com"
+        ],
+        "email": "pokidodeborah@gmail.com",
+        "code": "192418",
+        "created_at": "2026-09-10T16:53:29.533Z",
+        "is_verified": true
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 17,
+    "fields": {
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "email": "annjess005@gmail.com",
+        "code": "935679",
+        "created_at": "2026-09-24T05:17:37.928Z",
+        "is_verified": false
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 18,
+    "fields": {
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "email": "annjess005@gmail.com",
+        "code": "696074",
+        "created_at": "2026-09-24T05:22:16.319Z",
+        "is_verified": false
+    }
+},
+{
+    "model": "accounts.emailotp",
+    "pk": 19,
+    "fields": {
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "email": "annjess005@gmail.com",
+        "code": "892666",
+        "created_at": "2026-09-24T05:22:20.203Z",
+        "is_verified": true
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Rings",
+        "slug": "rings",
+        "description": "",
+        "created_at": "2026-09-08T09:51:33.985Z"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Watches",
+        "slug": "watches",
+        "description": "",
+        "created_at": "2026-09-08T09:51:33.994Z"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Tailoring",
+        "slug": "tailoring",
+        "description": "",
+        "created_at": "2026-09-08T09:51:33.997Z"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Accessories",
+        "slug": "accessories",
+        "description": "",
+        "created_at": "2026-09-08T09:51:34Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "category": 1,
+        "name": "Emerald Halo Ring",
+        "slug": "emerald-halo-ring-rng-002",
+        "product_type": "ring",
+        "description": "A refined piece from the ERINAYOMI collection, crafted for everyday elegance.",
+        "price": "145000.00",
+        "discount_price": null,
+        "sku": "RNG-002",
+        "stock": 4,
+        "is_active": true,
+        "is_featured": true,
+        "created_at": "2026-09-08T09:51:34.026Z",
+        "updated_at": "2026-09-23T10:56:28.079Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "category": 2,
+        "name": "Classic Steel Chronograph",
+        "slug": "classic-steel-chronograph-wch-001",
+        "product_type": "watch",
+        "description": "A refined piece from the ERINAYOMI collection, crafted for everyday elegance.",
+        "price": "210000.00",
+        "discount_price": null,
+        "sku": "WCH-001",
+        "stock": 6,
+        "is_active": true,
+        "is_featured": true,
+        "created_at": "2026-09-08T09:51:34.030Z",
+        "updated_at": "2026-09-23T11:00:07.329Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "category": 2,
+        "name": "Rose Gold Dress Watch",
+        "slug": "rose-gold-dress-watch-wch-002",
+        "product_type": "watch",
+        "description": "A refined piece from the ERINAYOMI collection, crafted for everyday elegance.",
+        "price": "265000.00",
+        "discount_price": null,
+        "sku": "WCH-002",
+        "stock": 3,
+        "is_active": true,
+        "is_featured": true,
+        "created_at": "2026-09-08T09:51:34.034Z",
+        "updated_at": "2026-09-26T07:02:14.930Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "category": 3,
+        "name": "Bespoke Agbada, Made to Measure",
+        "slug": "bespoke-agbada-made-to-measure-tlr-001",
+        "product_type": "tailoring",
+        "description": "A refined piece from the ERINAYOMI collection, crafted for everyday elegance.",
+        "price": "180000.00",
+        "discount_price": null,
+        "sku": "TLR-001",
+        "stock": 19,
+        "is_active": true,
+        "is_featured": true,
+        "created_at": "2026-09-08T09:51:34.037Z",
+        "updated_at": "2026-09-23T11:01:08.970Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "category": 3,
+        "name": "Tailored Kaftan",
+        "slug": "tailored-kaftan-tlr-002",
+        "product_type": "tailoring",
+        "description": "A refined piece from the ERINAYOMI collection, crafted for everyday elegance.",
+        "price": "95000.00",
+        "discount_price": null,
+        "sku": "TLR-002",
+        "stock": 13,
+        "is_active": true,
+        "is_featured": false,
+        "created_at": "2026-09-08T09:51:34.041Z",
+        "updated_at": "2026-09-24T06:24:41.715Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "category": 4,
+        "name": "Leather Card Wallet",
+        "slug": "leather-card-wallet-acc-002",
+        "product_type": "accessory",
+        "description": "A refined piece from the ERINAYOMI collection, crafted for everyday elegance.",
+        "price": "48270.00",
+        "discount_price": null,
+        "sku": "ACC-002",
+        "stock": 40,
+        "is_active": true,
+        "is_featured": false,
+        "created_at": "2026-09-08T09:51:34.049Z",
+        "updated_at": "2026-09-24T06:20:57.597Z"
+    }
+},
+{
+    "model": "catalog.productimage",
+    "pk": 1,
+    "fields": {
+        "product": 2,
+        "image": "products/emaral_gckW4G3.jpg",
+        "alt_text": "",
+        "is_primary": false,
+        "order": 0
+    }
+},
+{
+    "model": "catalog.productimage",
+    "pk": 3,
+    "fields": {
+        "product": 3,
+        "image": "products/images_IYKXG1h.jpg",
+        "alt_text": "",
+        "is_primary": false,
+        "order": 0
+    }
+},
+{
+    "model": "catalog.productimage",
+    "pk": 4,
+    "fields": {
+        "product": 4,
+        "image": "products/rosegold-watch_H0I6iFB.jpg",
+        "alt_text": "",
+        "is_primary": false,
+        "order": 0
+    }
+},
+{
+    "model": "catalog.productimage",
+    "pk": 5,
+    "fields": {
+        "product": 5,
+        "image": "products/agbada_Z7V7Kq2.jpg",
+        "alt_text": "",
+        "is_primary": false,
+        "order": 0
+    }
+},
+{
+    "model": "catalog.productimage",
+    "pk": 7,
+    "fields": {
+        "product": 6,
+        "image": "products/kaftan_hFlODlr.jpg",
+        "alt_text": "",
+        "is_primary": false,
+        "order": 0
+    }
+},
+{
+    "model": "catalog.productimage",
+    "pk": 8,
+    "fields": {
+        "product": 8,
+        "image": "products/leather_5EJ58zo.jpg",
+        "alt_text": "",
+        "is_primary": false,
+        "order": 0
+    }
+},
+{
+    "model": "catalog.review",
+    "pk": 3,
+    "fields": {
+        "product": 8,
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "rating": 1,
+        "comment": "Review with 1 star(s)",
+        "created_at": "2026-09-16T07:32:18.409Z"
+    }
+},
+{
+    "model": "catalog.review",
+    "pk": 5,
+    "fields": {
+        "product": 6,
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "rating": 3,
+        "comment": "Review with 3 star(s)",
+        "created_at": "2026-09-16T07:32:18.428Z"
+    }
+},
+{
+    "model": "catalog.review",
+    "pk": 6,
+    "fields": {
+        "product": 5,
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "rating": 4,
+        "comment": "Review with 4 star(s)",
+        "created_at": "2026-09-16T07:32:18.430Z"
+    }
+},
+{
+    "model": "catalog.review",
+    "pk": 7,
+    "fields": {
+        "product": 4,
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "rating": 5,
+        "comment": "Review with 5 star(s)",
+        "created_at": "2026-09-16T07:32:18.435Z"
+    }
+},
+{
+    "model": "catalog.review",
+    "pk": 8,
+    "fields": {
+        "product": 3,
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "rating": 1,
+        "comment": "Review with 1 star(s)",
+        "created_at": "2026-09-16T07:32:18.437Z"
+    }
+},
+{
+    "model": "catalog.review",
+    "pk": 9,
+    "fields": {
+        "product": 2,
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "rating": 2,
+        "comment": "Review with 2 star(s)",
+        "created_at": "2026-09-16T07:32:18.440Z"
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "session_key": null,
+        "created_at": "2026-09-08T09:45:35.391Z",
+        "updated_at": "2026-09-08T09:45:35.391Z"
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 2,
+    "fields": {
+        "user": null,
+        "session_key": "e8795ugzgqtdgpf8iitn077v1v7a5l9e",
+        "created_at": "2026-09-10T15:58:14.458Z",
+        "updated_at": "2026-09-10T15:58:14.458Z"
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "pokidodeborah@gmail.com"
+        ],
+        "session_key": null,
+        "created_at": "2026-09-11T08:48:30.641Z",
+        "updated_at": "2026-09-11T08:48:30.641Z"
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "session_key": null,
+        "created_at": "2026-09-15T08:53:08.485Z",
+        "updated_at": "2026-09-15T08:53:08.485Z"
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 6,
+    "fields": {
+        "user": null,
+        "session_key": "6q6np391s515acbsmozyrvyrlknvwa07",
+        "created_at": "2026-09-23T09:23:35.792Z",
+        "updated_at": "2026-09-23T09:23:35.792Z"
+    }
+},
+{
+    "model": "cart.cart",
+    "pk": 7,
+    "fields": {
+        "user": null,
+        "session_key": "d0bs3vieehuzd2b77qqs78jjoqzvjbii",
+        "created_at": "2026-09-24T14:03:41.072Z",
+        "updated_at": "2026-09-24T14:03:41.072Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 9,
+    "fields": {
+        "cart": 6,
+        "product": 8,
+        "quantity": 1,
+        "added_at": "2026-09-23T09:23:35.802Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 10,
+    "fields": {
+        "cart": 6,
+        "product": 5,
+        "quantity": 1,
+        "added_at": "2026-09-23T09:28:09.082Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 11,
+    "fields": {
+        "cart": 6,
+        "product": 2,
+        "quantity": 1,
+        "added_at": "2026-09-23T09:28:59.116Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 12,
+    "fields": {
+        "cart": 6,
+        "product": 6,
+        "quantity": 1,
+        "added_at": "2026-09-23T09:29:09.389Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 13,
+    "fields": {
+        "cart": 6,
+        "product": 3,
+        "quantity": 1,
+        "added_at": "2026-09-23T09:29:17.717Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 14,
+    "fields": {
+        "cart": 6,
+        "product": 4,
+        "quantity": 1,
+        "added_at": "2026-09-23T09:29:23.283Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 19,
+    "fields": {
+        "cart": 7,
+        "product": 6,
+        "quantity": 1,
+        "added_at": "2026-09-25T08:50:58.819Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 20,
+    "fields": {
+        "cart": 7,
+        "product": 4,
+        "quantity": 1,
+        "added_at": "2026-09-25T08:59:04.652Z"
+    }
+},
+{
+    "model": "cart.cartitem",
+    "pk": 21,
+    "fields": {
+        "cart": 7,
+        "product": 3,
+        "quantity": 1,
+        "added_at": "2026-09-25T09:01:53.790Z"
+    }
+},
+{
+    "model": "orders.order",
+    "pk": 8,
+    "fields": {
+        "order_number": "ERY-C3000E3E17",
+        "user": null,
+        "full_name": "Temitope Olawuyi",
+        "email": "temitopesunday005@gmail.com",
+        "phone_number": "08108607409",
+        "shipping_address": "13.Agbonjinu",
+        "city": "Agege,",
+        "state": "Lagos State, Nigeria",
+        "delivery_method": "delivery",
+        "status": "pending",
+        "delivery_date": null,
+        "delivery_time": "",
+        "order_notes": "",
+        "subtotal": "95000.00",
+        "shipping_fee": "0.00",
+        "total": "95000.00",
+        "paystack_reference": "ERY-C3000E3E17",
+        "created_at": "2026-09-25T08:51:12.033Z",
+        "updated_at": "2026-09-25T08:51:12.033Z"
+    }
+},
+{
+    "model": "orders.orderitem",
+    "pk": 12,
+    "fields": {
+        "order": 8,
+        "product": 6,
+        "product_name": "Tailored Kaftan",
+        "price": "95000.00",
+        "quantity": 1
+    }
+},
+{
+    "model": "wishlist.wishlist",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "pokidodeborah@gmail.com"
+        ],
+        "product": 5,
+        "added_at": "2026-09-11T08:48:27.062Z"
+    }
+},
+{
+    "model": "store_settings.storesettings",
+    "pk": 1,
+    "fields": {
+        "business_name": "ERINAYOMI",
+        "business_email": "temitopesunday005@gmail.com",
+        "phone_number": "+234 810 860 7409",
+        "whatsapp_number": "+2348108607409",
+        "logo": "",
+        "address": "3 Peaceland Street, Atala, Mowe, Ogun State.",
+        "business_hours": "Mon-Sat, 9am-7pm",
+        "facebook_link": "",
+        "instagram_link": "https://www.instagram.com/tshin_e3?stkn=MTg2bnNkbDRsZTdoYg==",
+        "tiktok_link": "",
+        "delivery_fee": "0.00",
+        "free_shipping_threshold": null,
+        "return_policy": "",
+        "shipping_policy": "",
+        "privacy_policy": "",
+        "updated_at": "2026-09-24T05:53:44.997Z"
+    }
+},
+{
+    "model": "store_settings.newslettersubscriber",
+    "pk": 1,
+    "fields": {
+        "email": "temitopesunday005@gmail.com",
+        "subscribed_at": "2026-09-24T08:33:10.310Z",
+        "is_active": true
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2026-09-08T11:16:57.155Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "store_settings",
+            "storesettings"
+        ],
+        "object_id": "1",
+        "object_repr": "ERINAYOMI",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Business hours\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2026-09-09T08:50:11.945Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "3",
+        "object_repr": "Don_Promise",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2026-09-09T08:54:38.439Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "5",
+        "object_repr": "Ebenezer",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2026-09-09T10:44:42.383Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "6",
+        "object_repr": "Ebenezer",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2026-09-09T10:49:44.650Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "7",
+        "object_repr": "Ebenezer",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2026-09-09T10:57:25.725Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "8",
+        "object_repr": "Ebenezer",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2026-09-09T11:03:28.336Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "9",
+        "object_repr": "Peter",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2026-09-09T11:23:05.504Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "10",
+        "object_repr": "Peter",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2026-09-09T11:39:01.916Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "11",
+        "object_repr": "AIKO",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2026-09-09T11:44:48.949Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "12",
+        "object_repr": "AIKO",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2026-09-09T11:54:08.163Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "14",
+        "object_repr": "Bukola",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2026-09-09T11:57:32.047Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "15",
+        "object_repr": "Bukola",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2026-09-11T11:51:13.637Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "3",
+        "object_repr": "ERY-B147F0BF91",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2026-09-11T11:51:55.035Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "3",
+        "object_repr": "ERY-B147F0BF91",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2026-09-16T09:29:09.063Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "1",
+        "object_repr": "Adaeze Gold Band Ring",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2026-09-23T08:47:02.045Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "5",
+        "object_repr": "Bespoke Agbada, Made to Measure",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2026-09-23T08:48:22.221Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "6",
+        "object_repr": "Tailored Kaftan",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2026-09-23T08:48:22.224Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "5",
+        "object_repr": "Bespoke Agbada, Made to Measure",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2026-09-23T08:48:58.514Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "6",
+        "object_repr": "Tailored Kaftan",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2026-09-23T08:48:58.517Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "5",
+        "object_repr": "Bespoke Agbada, Made to Measure",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is featured\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2026-09-23T10:41:31.927Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "accounts",
+            "user"
+        ],
+        "object_id": "19",
+        "object_repr": "temmy005@gmail.com",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2026-09-23T10:56:28.102Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "2",
+        "object_repr": "Emerald Halo Ring",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Emerald Halo Ring\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2026-09-23T10:57:10.348Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "3",
+        "object_repr": "Classic Steel Chronograph",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Classic Steel Chronograph\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2026-09-23T10:59:08.252Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "3",
+        "object_repr": "Classic Steel Chronograph",
+        "action_flag": 2,
+        "change_message": "[{\"deleted\": {\"name\": \"product image\", \"object\": \"Image for Classic Steel Chronograph\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2026-09-23T11:00:07.340Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "3",
+        "object_repr": "Classic Steel Chronograph",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Classic Steel Chronograph\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2026-09-23T11:00:41.749Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "4",
+        "object_repr": "Rose Gold Dress Watch",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Rose Gold Dress Watch\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2026-09-23T11:01:08.988Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "5",
+        "object_repr": "Bespoke Agbada, Made to Measure",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Bespoke Agbada, Made to Measure\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2026-09-24T05:51:20.015Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "store_settings",
+            "storesettings"
+        ],
+        "object_id": "1",
+        "object_repr": "ERINAYOMI",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Address\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2026-09-24T05:53:45.000Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "store_settings",
+            "storesettings"
+        ],
+        "object_id": "1",
+        "object_repr": "ERINAYOMI",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Instagram link\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2026-09-24T06:19:21.813Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "6",
+        "object_repr": "Tailored Kaftan",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Tailored Kaftan\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2026-09-24T06:19:38.441Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "6",
+        "object_repr": "Tailored Kaftan",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"product image\", \"object\": \"Image for Tailored Kaftan\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2026-09-24T06:20:57.607Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "8",
+        "object_repr": "Leather Card Wallet",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Price\"]}}, {\"added\": {\"name\": \"product image\", \"object\": \"Image for Leather Card Wallet\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2026-09-24T06:24:41.721Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "6",
+        "object_repr": "Tailored Kaftan",
+        "action_flag": 2,
+        "change_message": "[{\"deleted\": {\"name\": \"product image\", \"object\": \"Image for Tailored Kaftan\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2026-09-24T07:49:18.262Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "6",
+        "object_repr": "ERY-2E3E973118",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2026-09-24T07:54:22.658Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "5",
+        "object_repr": "ERY-0E8CC66AC6",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2026-09-24T07:54:40.702Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "4",
+        "object_repr": "ERY-B0468974AD",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2026-09-24T07:54:40.705Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "3",
+        "object_repr": "ERY-B147F0BF91",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2026-09-24T08:05:59.373Z",
+        "user": [
+            "annjess005@gmail.com"
+        ],
+        "content_type": [
+            "orders",
+            "order"
+        ],
+        "object_id": "7",
+        "object_repr": "ERY-D9037E6DFD",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2026-09-26T07:02:14.945Z",
+        "user": [
+            "tshine@gmail.com"
+        ],
+        "content_type": [
+            "catalog",
+            "product"
+        ],
+        "object_id": "4",
+        "object_repr": "Rose Gold Dress Watch",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"name\": \"product image\", \"object\": \"Image for Rose Gold Dress Watch\", \"fields\": [\"Image\"]}}]"
+    }
+}
+]
