@@ -64,13 +64,13 @@
       <a href="{% url 'catalog:product_list' %}?category={{ category.slug }}" class="category-card group rounded-sm reveal block overflow-hidden relative" style="min-height: 22rem;">
         
         {% if category.slug == 'accessories' %}
-<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/media/products/accessories.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+<img src="https://res.cloudinary.com/cmuattin/image/upload/v1740000000/products/accessories.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
 {% elif category.slug == 'rings' %}
-<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/media/products/ringss.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/ringss.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
 {% elif category.slug == 'tailoring' %}
-<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/media/products/tailoring.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/tailoring.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
 {% elif category.slug == 'watches' %}
-<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/media/products/watch.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+<img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/watch.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
         {% else %}
         <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
           <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
