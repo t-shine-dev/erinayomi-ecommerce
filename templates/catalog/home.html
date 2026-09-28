@@ -64,20 +64,25 @@
       {% for category in categories %}
       <a href="{% url 'catalog:product_list' %}?category={{ category.slug }}" class="category-card group rounded-sm reveal block overflow-hidden relative" style="min-height: 22rem;">
         
-        {% with first_prod=category.product_set.first %}
-          {% if first_prod and first_prod.primary_image %}
-          <img src="{{ first_prod.primary_image.image.url }}" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
-          {% elif first_prod and first_prod.images.first %}
-          <img src="{{ first_prod.images.first.image.url }}" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
-          {% else %}
-          <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
-            <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
-          </div>
-          {% endif %}
-        {% endwith %}
+        <!-- Background Image with Hover Zoom Effect -->
+        {% if category.slug == 'accessories' %}
+        <img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/accessories.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+        {% elif category.slug == 'rings' %}
+        <img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/ringss.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+        {% elif category.slug == 'tailoring' %}
+        <img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/tailoring.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+        {% elif category.slug == 'watches' %}
+        <img src="https://res.cloudinary.com/cmuattin/image/upload/v1/products/watch.jpg" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+        {% else %}
+        <!-- Fallback if any new category is added -->
+        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
+          <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
+        </div>
+        {% endif %}
 
-        <div class="absolute inset-0 bg-gradient-to-t from-[#171717] via-[#171717]/30 to-transparent"></div>
-        <span class="absolute bottom-6 left-6 z-10 right-6 flex items-end justify-between gap-2">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#171717] via-[#171717]/30 to-transparent z-10"></div>
+        
+        <span class="absolute bottom-6 left-6 z-20 right-6 flex items-end justify-between gap-2">
           <span class="font-serif text-xl text-white sm:text-2xl">{{ category.name }}</span>
           <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/40 text-sm text-white transition group-hover:border-gold group-hover:bg-gold group-hover:text-charcoal">↗</span>
         </span>
