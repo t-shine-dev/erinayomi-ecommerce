@@ -49,6 +49,7 @@
 
 <!-- 02 / CATEGORY DISCOVERY -->
 <!-- 02 / CATEGORY DISCOVERY -->
+<!-- 02 / CATEGORY DISCOVERY -->
 {% if categories %}
 <section id="categories" class="bg-soft py-20 sm:py-32">
   <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
@@ -64,13 +65,16 @@
       {% for category in categories %}
       <a href="{% url 'catalog:product_list' %}?category={{ category.slug }}" class="category-card group rounded-sm reveal block overflow-hidden relative" style="min-height: 22rem;">
         
-        {% with first_product=category.products.first %}
-          {% if first_product and first_product.primary_image %}
-          <img src="{{ first_product.primary_image.image.url }}" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+        {% comment %} Try to find an image from any product in this category {% endcomment %}
+        {% with prod=category.products.first %}
+          {% if prod.images.first %}
+            <img src="{{ prod.images.first.image.url }}" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
+          {% elif prod.primary_image %}
+            <img src="{{ prod.primary_image.image.url }}" alt="{{ category.name }}" loading="lazy" class="absolute inset-0 h-full w-full object-cover">
           {% else %}
-          <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
-            <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
-          </div>
+            <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#3a342d] to-[#171717]">
+              <span class="font-serif text-6xl text-gold/35">{{ category.name|first }}</span>
+            </div>
           {% endif %}
         {% endwith %}
 
