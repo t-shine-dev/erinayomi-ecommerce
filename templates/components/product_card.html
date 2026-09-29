@@ -40,8 +40,8 @@ Usage: {% include "components/product_card.html" with product=product %}
       {% include "components/star_rating.html" with rating=product.average_rating count=None %}
       <div class="mt-1.5 flex items-baseline gap-2">
         <span class="font-semibold text-white text-sm">
-          ₦{{ product.current_price|floatformat:2 }}
-        </span>
+  ₦{{ product.current_price|floatformat:2|intcomma }}
+</span>
         {% if product.is_on_sale %}<span class="text-xs text-gray-400 line-through">₦{{ product.price|floatformat:2 }}</span>{% endif %}
       </div>
     </div>
