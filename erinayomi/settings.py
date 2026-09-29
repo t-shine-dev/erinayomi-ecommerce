@@ -137,7 +137,7 @@ STORAGES = {
 }
 
 CLOUDINARY_STORAGE = {
-    "CLOUDINARY_URL": config("CLOUDINARY_URL", default="")
+    "CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL", "")
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
