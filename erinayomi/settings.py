@@ -5,6 +5,7 @@ from pathlib import Path
 
 import dj_database_url
 from decouple import Csv, config
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -124,6 +125,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 
 # Django 5.0+ modern STORAGES configuration supporting Cloudinary
+USE_CLOUDINARY = bool(os.environ.get('CLOUDINARY_URL'))
+
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage" if USE_CLOUDINARY else "django.core.files.storage.FileSystemStorage",
