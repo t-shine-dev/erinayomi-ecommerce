@@ -10,7 +10,14 @@
     <form method="post" data-loading-submit novalidate class="space-y-2">
       {% csrf_token %}
       
-      <!-- Compact 2-Column Grid for Name Fields to save vertical space -->
+      <!-- Non-field errors if any -->
+      {% if form.non_field_errors %}
+        <div class="mb-2 p-2 bg-red-50 text-red-600 text-xs rounded">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <!-- Compact 2-Column Grid for Name Fields -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {% for field in form %}
           {% if field.name == "first_name" or field.name == "last_name" or field.name == "surname" %}
@@ -23,9 +30,9 @@
         {% endfor %}
       </div>
 
-      <!-- Remaining fields rendered compactly -->
+      <!-- Core fields like Username, Email, etc. -->
       {% for field in form %}
-        {% if field.name != "country_code" and field.name != "phone_number" and field.name != "password1" and field.name != "password2" and field.name != "password" and field.name != "first_name" and field.name != "last_name" and field.name != "surname" %}
+        {% if field.name == "username" or field.name == "email" %}
           <div>
             <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5" for="{{ field.id_for_label }}">{{ field.label }}</label>
             {{ field }}
@@ -35,19 +42,21 @@
         {% endif %}
       {% endfor %}
 
-      <!-- Password Field with Show Toggle -->
-      {% if form.password1 %}
-        <div>
-          <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5" for="{{ form.password1.id_for_label }}">Password</label>
-          <div class="relative">
-            {{ form.password1 }}
-            <button type="button" onclick="togglePasswordVisibility('{{ form.password1.id_for_label }}', this)" class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-xs text-gray-400 hover:text-gold-dark focus:outline-none">
-              <span>Show</span>
-            </button>
+      <!-- Password Field with Show Toggle (Handles password1 or password) -->
+      {% with pwd_field=form.password1|default:form.password %}
+        {% if pwd_field %}
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5" for="{{ pwd_field.id_for_label }}">Password</label>
+            <div class="relative">
+              {{ pwd_field }}
+              <button type="button" onclick="togglePasswordVisibility('{{ pwd_field.id_for_label }}', this)" class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-xs text-gray-400 hover:text-gold-dark focus:outline-none">
+                <span>Show</span>
+              </button>
+            </div>
+            {% for error in pwd_field.errors %}<p class="field-error text-[10px]">{{ error }}</p>{% endfor %}
           </div>
-          {% for error in form.password1.errors %}<p class="field-error text-[10px]">{{ error }}</p>{% endfor %}
-        </div>
-      {% endif %}
+        {% endif %}
+      {% endwith %}
 
       <!-- Confirm Password Field -->
       {% if form.password2 %}
@@ -63,7 +72,7 @@
         </div>
       {% endif %}
 
-      <!-- Side-by-side Phone Group with wider country code box -->
+      <!-- Side-by-side Phone Group -->
       <div>
         <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5">Phone Number</label>
         <div class="flex gap-2">
@@ -77,6 +86,18 @@
         {% for error in form.country_code.errors %}<p class="field-error text-[10px]">{{ error }}</p>{% endfor %}
         {% for error in form.phone_number.errors %}<p class="field-error text-[10px]">{{ error }}</p>{% endfor %}
       </div>
+
+      <!-- Any other remaining custom fields -->
+      {% for field in form %}
+        {% if field.name != "country_code" and field.name != "phone_number" and field.name != "password1" and field.name != "password2" and field.name != "password" and field.name != "first_name" and field.name != "last_name" and field.name != "surname" and field.name != "username" and field.name != "email" %}
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-0.5" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="text-[10px] text-gray-400 mt-0.5">{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="field-error text-[10px]">{{ error }}</p>{% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
 
       <button type="submit" data-submit-btn data-loading-text="Creating account…" class="btn btn-primary w-full !py-2 !text-xs mt-2">Create Account</button>
     </form>
@@ -106,7 +127,6 @@
     const phoneInput = document.querySelector('input[name="phone_number"], input#id_phone_number');
 
     if (countrySelect && phoneInput) {
-      // Use structural placeholder patterns instead of real numbers
       const phoneFormats = {
         'NG': '___ ___ ____',
         'US': '___ ___ ____',
@@ -134,7 +154,6 @@
         phoneInput.placeholder = phoneFormats[key] || phoneFormats['DEFAULT'];
       }
 
-      // Auto-format phone numbers as the user types
       phoneInput.addEventListener('input', function (e) {
         let val = e.target.value.replace(/\D/g, '');
         const key = getSelectedCountryKey();
