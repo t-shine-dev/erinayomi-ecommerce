@@ -121,8 +121,10 @@
         <div class="flex items-center gap-3 text-sm">
           
           <!-- Product Image Mapping for Checkout Summary -->
-          <div class="w-12 h-12 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
-  {% if "Baguette" in item.product.name or "Ring" in item.product.name %}
+<div class="w-12 h-12 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
+  {% if "Emerald" in item.product.name or "Halo" in item.product.name %}
+    <img src="/media/products/emaral.jpg" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+  {% elif "Baguette" in item.product.name or "Ring" in item.product.name %}
     <img src="/media/products/yellow.jpg" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
   {% elif "Classic Steel" in item.product.name %}
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
@@ -132,8 +134,6 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
   {% elif item.product.primary_image %}
     <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% elif item.product.productimage_set.first %}
-    <img src="{{ item.product.productimage_set.first.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
   {% else %}
     <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-sm">
       {{ item.product.name|first }}
