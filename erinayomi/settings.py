@@ -180,7 +180,6 @@ DEFAULT_WHATSAPP_NUMBER = config("DEFAULT_WHATSAPP_NUMBER", default="23480000000
 # EMAIL_* vars aren't set. Set EMAIL_BACKEND=smtp in .env to send for real.
 # --------------------------------------------------------------------------
 EMAIL_BACKEND = config("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
-
 EMAIL_HOST = config("EMAIL_HOST", default="smtp.gmail.com")
 EMAIL_PORT = config("EMAIL_PORT", default=465, cast=int)
 EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=False, cast=bool)
