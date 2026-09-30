@@ -121,32 +121,32 @@
         <div class="flex items-center gap-3 text-sm">
           
           <!-- Product Image Mapping for Checkout Summary -->
-<div class="w-12 h-12 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
-  {% if "Emerald" in item.product.name or "Halo" in item.product.name %}
-    <img src="/media/products/emaral.jpg" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% elif "Baguette" in item.product.name or "Ring" in item.product.name %}
-    <img src="/media/products/yellow.jpg" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% elif "Classic Steel" in item.product.name %}
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% elif "Leather Card Wallet" in item.product.name %}
-    <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% elif "Tailored Kaftan" in item.product.name %}
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% elif item.product.primary_image %}
-    <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-  {% else %}
-    <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-sm">
-      {{ item.product.name|first }}
-    </div>
-  {% endif %}
+<div class="flex items-center gap-3 py-2">
+  <div class="w-12 h-12 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
+    {% if "Emerald" in item.product.name or "Halo" in item.product.name %}
+      <img src="/media/products/emaral.jpg" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+    {% elif "Baguette" in item.product.name or "Ring" in item.product.name %}
+      <img src="/media/products/yellow.jpg" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+    {% elif "Classic Steel" in item.product.name %}
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+    {% elif "Leather Card Wallet" in item.product.name %}
+      <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+    {% elif "Tailored Kaftan" in item.product.name %}
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+    {% elif item.product.primary_image %}
+      <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+    {% else %}
+      <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-sm">
+        {{ item.product.name|first }}
+      </div>
+    {% endif %}
+  </div>
+  <div class="flex-1 min-w-0">
+    <p class="text-sm font-medium text-zinc-900 truncate">{{ item.product.name }}</p>
+    <p class="text-xs text-zinc-500">Qty {{ item.quantity }}</p>
+  </div>
+  <div class="text-sm font-semibold text-zinc-900">₦{{ item.subtotal|floatformat:2|intcomma }}</div>
 </div>
-
-          <div class="flex-1">
-            <div class="truncate">{{ item.product.name }}</div>
-            <div class="text-xs text-gray-400">Qty {{ item.quantity }}</div>
-          </div>
-          <div class="font-medium">₦{{ item.subtotal|floatformat:0|intcomma }}</div>
-        </div>
         {% endfor %}
       </div>
       <div class="divider-gold my-4"></div>
