@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
-    'cloudinary_storage',  
+    'cloudinary_storage',
     'cloudinary',
 ]
 # Conditionally add Cloudinary storage packages only once if enabled
