@@ -28,20 +28,14 @@
     <!-- Right Column: Image Frame -->
     <div class="relative lg:col-span-6 reveal-scale mt-5 lg:mt-14">
       <div class="hero-image-frame rounded-sm relative w-full h-[300px] sm:h-[380px] lg:h-[420px] overflow-hidden shadow-2xl bg-[#262626]">
-        {% if featured_product.primary_image %}
-          <img src="{{ featured_product.primary_image.image.url }}" alt="{{ featured_product.name|default:'ERINAYOMI Luxury Ring' }}" class="absolute inset-0 h-full w-full object-cover object-center" fetchpriority="high">
-        {% elif featured_product.productimage_set.first %}
-          <img src="{{ featured_product.productimage_set.first.image.url }}" alt="{{ featured_product.name|default:'ERINAYOMI Luxury Ring' }}" class="absolute inset-0 h-full w-full object-cover object-center" fetchpriority="high">
-        {% else %}
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" alt="ERINAYOMI Luxury Ring" class="absolute inset-0 h-full w-full object-cover object-center" fetchpriority="high">
-        {% endif %}
+        <img src="/media/products/yellow.jpg" alt="Baguette Gold Ring" class="absolute inset-0 h-full w-full object-cover object-center" fetchpriority="high">
 
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
         <div class="absolute inset-x-6 bottom-4 z-10 flex items-end justify-between gap-4">
           <div>
             <p class="text-[10px] uppercase tracking-[0.2em] text-white/50">Featured piece</p>
-            <p class="mt-1 font-serif text-base sm:text-xl">{{ featured_product.name|default:"Baguette Diamond Ring" }}</p>
-            <p class="mt-1 text-xs sm:text-sm text-white/65">₦{{ featured_product.current_price|default:"150000"|floatformat:2|intcomma }}</p>
+            <p class="mt-1 font-serif text-base sm:text-xl">Baguette Gold Ring</p>
+            <p class="mt-1 text-xs sm:text-sm text-white/65">₦350,000.00</p>
           </div>
           <a href="{% url 'catalog:product_list' %}" aria-label="View collection" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-gold transition hover:bg-gold hover:text-charcoal">↗</a>
         </div>
