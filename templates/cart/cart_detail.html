@@ -11,43 +11,56 @@
   {% if cart_items %}
   <div class="card-surface divide-y divide-gray-200 bg-white border border-gray-200 shadow-sm">
     {% for item in cart_items %}
-    <div class="flex items-center gap-4 p-4">
-      
-      <!-- Dynamic Cloudinary Product Image -->
-      <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200 relative">
-        {% if item.product.primary_image %}
-          <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-        {% elif item.product.productimage_set.first %}
-          <img src="{{ item.product.productimage_set.first.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
-        {% else %}
-          <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-xl">
-            {{ item.product.name|first }}
-          </div>
-        {% endif %}
-      </div>
-
-      <div class="flex-1 min-w-0">
-        <a href="{{ item.product.get_absolute_url }}" class="font-serif text-lg text-charcoal hover:text-gold-dark transition truncate block font-medium">{{ item.product.name }}</a>
-        <div class="text-sm text-zinc-600">₦{{ item.product.current_price|floatformat:2|intcomma }} each</div>
-      </div>
-
-      <form action="{% url 'cart:update_cart_item' item.id %}" method="post" data-loading-submit class="flex items-center gap-2">
-        {% csrf_token %}
-        <label class="sr-only" for="qty-{{ item.id }}">Quantity for {{ item.product.name }}</label>
-        <input id="qty-{{ item.id }}" type="number" name="quantity" value="{{ item.quantity }}" min="0" class="input-field w-16 !py-1.5 text-center text-charcoal border border-gray-300">
-        <button type="submit" data-submit-btn data-loading-text="…" class="text-xs uppercase tracking-wide font-semibold text-gold-dark hover:underline">Update</button>
-      </form>
-
-      <div class="w-28 text-right font-semibold text-charcoal">₦{{ item.subtotal|floatformat:2|intcomma }}</div>
-
-       <form action="{% url 'cart:remove_from_cart' item.id %}" method="post">
-         {% csrf_token %}
-         <button type="submit" aria-label="Remove {{ item.product.name }}" class="text-gray-400 hover:text-red-600 transition p-1">
-           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-         </button>
-       </form>
+<div class="flex items-center justify-between py-4 border-b border-gray-100 gap-4">
+  <div class="flex items-center gap-4 min-w-0">
+    <!-- Image Fallback Mapping -->
+    <div class="w-16 h-16 bg-gray-100 rounded overflow-hidden shrink-0 border border-gray-200">
+      {% if "Emerald" in item.product.name or "Halo" in item.product.name %}
+        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+      {% elif "Baguette" in item.product.name or "Ring" in item.product.name %}
+        <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+      {% elif "Classic Steel" in item.product.name %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChlviUsDU7wPWVxVZwjOQjLNJbL4Gl2AY3QGGg7vTdJKZRUjGuyapy5nqUTo-qz_W2-5HgR5d_wKp2fnIbC5bxS8WHYg1QO0e-7tL3DcB9P4a1jU0rehyMg&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+      {% elif "Leather Card Wallet" in item.product.name %}
+        <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQVGn82xwl-xROQJda2RkW-LP5ShwnE5Q49uEqtV_Pnix5BARPeQD3A-zoA71fFUeMBZZIUMJb7JRu3N9iAB3JB5CVoX3CobxWxwCEuHvI6vghJ_oZ1hs2rGnsmgwdq9lGJSN4C1kczaA&usqp=CAc" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+      {% elif "Tailored Kaftan" in item.product.name or "Agbada" in item.product.name %}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlIC-XwBrQ16woyJrphZmrQw5ZCLcuB2lLUgIj9dvmA&s=10" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+      {% elif item.product.primary_image %}
+        <img src="{{ item.product.primary_image.image.url }}" class="w-full h-full object-cover object-center" alt="{{ item.product.name }}">
+      {% else %}
+        <div class="flex h-full w-full items-center justify-center bg-zinc-900 text-gold font-serif text-sm">
+          {{ item.product.name|first }}
+        </div>
+      {% endif %}
     </div>
-    {% endfor %}
+
+    <div class="min-w-0">
+      <a href="{{ item.product.get_absolute_url }}" class="font-serif text-base text-charcoal hover:text-gold-dark transition truncate block font-medium">{{ item.product.name }}</a>
+      <div class="text-xs text-zinc-500 mt-0.5">₦{{ item.product.current_price|floatformat:2|intcomma }} each</div>
+    </div>
+  </div>
+
+  <!-- Quantity Update Form -->
+  <form action="{% url 'cart:update_cart_item' item.id %}" method="post" data-loading-submit class="flex items-center gap-2 shrink-0">
+    {% csrf_token %}
+    <label class="sr-only" for="qty-{{ item.id }}">Quantity for {{ item.product.name }}</label>
+    <input id="qty-{{ item.id }}" type="number" name="quantity" value="{{ item.quantity }}" min="0" class="input-field w-16 !py-1.5 text-center text-charcoal border border-gray-300">
+    <button type="submit" data-submit-btn data-loading-text="…" class="text-xs uppercase tracking-wide font-semibold text-gold-dark hover:underline">Update</button>
+  </form>
+
+  <div class="flex items-center gap-4 shrink-0">
+    <span class="text-sm font-semibold text-charcoal w-24 text-right">₦{{ item.subtotal|floatformat:2|intcomma }}</span>
+    
+    <!-- Remove Form using item.id -->
+    <form action="{% url 'cart:remove_from_cart' item.id %}" method="post" class="shrink-0">
+      {% csrf_token %}
+      <button type="submit" aria-label="Remove {{ item.product.name }}" class="text-gray-400 hover:text-red-600 transition p-1">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+{% endfor %}
   </div>
 
   <div class="flex flex-col sm:flex-row justify-between items-start gap-6 mt-8">
