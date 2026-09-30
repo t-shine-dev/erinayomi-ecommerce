@@ -22,12 +22,13 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False  # Inactive until OTP verification
+            user.is_active = False 
             user.save()
 
             # Create and send OTP
-            otp_record = EmailOTP.objects.create(user=user, email=user.email)
-            otp_record.generate_code()
+            otp_record = EmailOTP(user=user, email=user.email)
+            otp_record.generate_code() 
+            otp_record.save()
             
             send_mail(
                 subject='Your ERINAYOMI Verification Code',
