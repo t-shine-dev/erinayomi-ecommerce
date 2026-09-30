@@ -49,9 +49,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
 ]
-# Conditionally add Cloudinary storage packages only once if enabled
-if USE_CLOUDINARY:
-    INSTALLED_APPS += ["cloudinary_storage", "cloudinary"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
