@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
+    "django.contrib.staticfiles",  # Keep this top one
     "django.contrib.humanize",
     "rest_framework",
     # Local apps
@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     "wishlist",
     "store_settings",
     "payments",
+    'cloudinary_storage',
+    'cloudinary',  # Removed the duplicate django.contrib.staticfiles from down here
 ]
-
 # Conditionally add Cloudinary storage packages only once if enabled
 if USE_CLOUDINARY:
     INSTALLED_APPS += ["cloudinary_storage", "cloudinary"]
