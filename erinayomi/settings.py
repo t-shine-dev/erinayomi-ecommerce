@@ -23,6 +23,11 @@ CSRF_TRUSTED_ORIGINS = config(
     cast=Csv()
 )
 
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "Lax"
+
 USE_CLOUDINARY = config("USE_CLOUDINARY", default=False, cast=bool)
 
 # --------------------------------------------------------------------------
