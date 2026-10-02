@@ -93,14 +93,11 @@ ASGI_APPLICATION = "erinayomi.asgi.application"
 # Uses local PostgreSQL by default, switches to Render PostgreSQL via environment variable.
 # --------------------------------------------------------------------------
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "erinayomi",
-        "USER": "postgres",
-        "PASSWORD": "Temmy005@", 
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    'default': dj_database_url.parse(
+        os.environ.get('DATABASE_URL', 'postgres://postgres:Temmy005@localhost:5432/erinayomi'),
+        conn_max_age=600,
+        ssl_require=not DEBUG, 
+    )
 }
 
 AUTH_USER_MODEL = "accounts.User"
