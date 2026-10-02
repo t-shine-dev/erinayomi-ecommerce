@@ -7,18 +7,11 @@ app_name = "accounts"
 
 urlpatterns = [
     path("register/", views.register, name="register"),
-    path("verify-otp/", views.verify_otp_view, name="verify_otp"),
-    path(
-        "login/",
-        views.login_view,
-        name="login",
-    ),
+    path("login/", views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
     
-    # Custom 6-Digit Password Reset URLs
+    # Password Reset Request Only
     path("password-reset/", views.password_reset_request_view, name="password_reset"),
-    path("password-reset/verify/", views.password_reset_verify_view, name="password_reset_verify"),
-    path("password-reset/confirm/", views.password_reset_confirm_view, name="password_reset_confirm"),
 
     path("profile/", views.profile, name="profile"),
     path("profile/settings/", views.profile_settings, name="profile_settings"),

@@ -90,11 +90,18 @@ ASGI_APPLICATION = "erinayomi.asgi.application"
 
 # --------------------------------------------------------------------------
 # Database
-# Defaults to local sqlite3 so the project runs immediately after `migrate`.
-# Set DATABASE_URL in .env to point at Postgres for production.
+# Uses local PostgreSQL by default, switches to Render PostgreSQL via environment variable.
 # --------------------------------------------------------------------------
-DATABASE_URL = config("DATABASE_URL")
-DATABASES = {"default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "erinayomi",
+        "USER": "postgres",
+        "PASSWORD": "Temmy005@", 
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
 
 AUTH_USER_MODEL = "accounts.User"
 
@@ -160,6 +167,7 @@ else:
     }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 # --------------------------------------------------------------------------
 # Auth redirects
 # --------------------------------------------------------------------------
@@ -181,8 +189,6 @@ DEFAULT_WHATSAPP_NUMBER = config("DEFAULT_WHATSAPP_NUMBER", default="23480000000
 
 # --------------------------------------------------------------------------
 # Email (order confirmations, password resets)
-# Defaults to printing emails to the console so nothing breaks in dev when
-# EMAIL_* vars aren't set. Set EMAIL_BACKEND=smtp in .env to send for real.
 # --------------------------------------------------------------------------
 EMAIL_BACKEND = config("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_HOST = config("EMAIL_HOST", default="smtp.gmail.com")
@@ -193,6 +199,7 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER or DEFAULT_STORE_EMAIL)
 
+RESEND_API_KEY = config("RESEND_API_KEY", default="")
 
 # --------------------------------------------------------------------------
 # Security hardening (relaxed automatically while DEBUG=True)

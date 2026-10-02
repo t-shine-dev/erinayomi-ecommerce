@@ -2,6 +2,7 @@
 <header id="site-header" class="fixed top-0 inset-x-0 z-40 transition-colors duration-300 bg-charcoal shadow-md text-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-16 gap-4">
+      <!-- Logo -->
       <a href="{% url 'catalog:home' %}" class="font-serif text-2xl tracking-[0.12em] flex items-center gap-2 shrink-0">
         {% if store_settings.logo %}
           <img src="{{ store_settings.logo.url }}" alt="{{ store_settings.business_name }} logo" class="h-8 w-8 object-contain">
@@ -11,6 +12,7 @@
         {{ store_settings.business_name|default:"ERINAYOMI" }}
       </a>
 
+      <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center gap-6 text-sm tracking-wide" aria-label="Primary">
         <a href="{% url 'catalog:product_list' %}" class="hover:text-gold transition">Shop</a>
         <a href="{% url 'catalog:home' %}#categories" class="hover:text-gold transition">Categories</a>
@@ -18,47 +20,85 @@
         <a href="{% url 'catalog:about' %}" class="hover:text-gold transition">About</a>
         <a href="{% url 'catalog:contact' %}" class="hover:text-gold transition">Contact</a>
 
-        <button type="button" onclick="openSearchModal()" aria-label="Search" class="hover:text-gold transition">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <!-- Search Icon -->
+        <button type="button" onclick="openSearchModal()" aria-label="Search" class="flex flex-col items-center hover:text-gold transition text-[10px]">
+          <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <span>Search</span>
         </button>
 
-        <a href="{% url 'wishlist:wishlist' %}" class="relative hover:text-gold transition" aria-label="Wishlist">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <!-- Wishlist Icon -->
+        <a href="{% url 'wishlist:wishlist' %}" class="relative flex flex-col items-center hover:text-gold transition text-[10px]" aria-label="Wishlist">
+          <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <path d="M12 21s-7.5-4.6-10-9.1C.4 8.5 2 4.5 6 4c2.2-.3 4 1 6 3.3C14 5 15.8 3.7 18 4c4 .5 5.6 4.5 4 7.9-2.5 4.5-10 9.1-10 9.1z"/>
           </svg>
+          <span>Wishlist</span>
         </a>
 
-        <a href="{% url 'cart:cart_detail' %}" class="relative hover:text-gold transition" aria-label="Cart, {{ nav_cart.item_count|default:0 }} items">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <!-- Cart Icon -->
+        <a href="{% url 'cart:cart_detail' %}" class="relative flex flex-col items-center hover:text-gold transition text-[10px]" aria-label="Cart, {{ nav_cart.item_count|default:0 }} items">
+          <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <path d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13L5.4 5M7 13l-2 5h13M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
           </svg>
           {% if nav_cart and nav_cart.item_count %}
-          <span class="absolute -top-2 -right-2 bg-gold text-charcoal text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">{{ nav_cart.item_count }}</span>
+          <span class="absolute -top-1 -right-2 bg-gold text-charcoal text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">{{ nav_cart.item_count }}</span>
           {% endif %}
+          <span>Cart</span>
         </a>
 
+        <!-- Desktop Authenticated Actions -->
         {% if user.is_authenticated %}
-  <a href="{% url 'accounts:profile' %}" class="block py-2 text-base font-medium">Profile Account</a>
-  {% if user.is_staff %}<a href="{% url 'store_settings:dashboard' %}" class="block py-2 text-base font-medium">Dashboard</a>{% endif %}
-  
-  <!-- Mobile Logout Form -->
-  <form action="{% url 'accounts:logout' %}" method="post" class="mt-2 pt-2 border-t border-white/10">
-    {% csrf_token %}
-    <button type="submit" class="w-full text-left text-red-400 hover:text-red-300 py-2 text-base font-medium">
-      Logout
-    </button>
-  </form>
-{% else %}
-  <a href="{% url 'accounts:login' %}" class="btn btn-gold w-full text-center mt-2">Login</a>
-{% endif %}
+          <a href="{% url 'accounts:profile' %}" class="flex flex-col items-center hover:text-gold transition text-[10px]" aria-label="Profile Account">
+            <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Profile</span>
+          </a>
+
+          {% if user.is_staff %}
+            <a href="{% url 'store_settings:dashboard' %}" class="flex flex-col items-center hover:text-gold transition text-[10px]" aria-label="Dashboard">
+              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Dashboard</span>
+            </a>
+          {% endif %}
+          
+          <form action="{% url 'accounts:logout' %}" method="post" class="inline-block m-0">
+            {% csrf_token %}
+            <button type="submit" class="flex flex-col items-center text-red-400 hover:text-red-300 transition text-[10px] bg-transparent border-none cursor-pointer p-0" aria-label="Logout">
+              <svg class="w-5 h-5 mb-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              <span>Logout</span>
+            </button>
+          </form>
+        {% else %}
+          <a href="{% url 'accounts:login' %}" class="btn btn-gold text-center px-4 py-1.5 text-xs">Login</a>
+        {% endif %}
       </nav>
 
+      <!-- Mobile Controls (Search & Menu Toggle) -->
       <div class="flex items-center gap-3 md:hidden">
         <button type="button" onclick="openSearchModal()" aria-label="Search" class="p-1">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
         </button>
-        <button type="button" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" class="p-1" onclick="toggleMobileMenu()">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+
+        <!-- Mobile Menu Hamburger / Close Toggle Button -->
+        <button type="button" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" class="p-1 relative w-6 h-6 focus:outline-none" onclick="toggleMobileMenu()">
+          <!-- Hamburger Icon (Visible by default) -->
+          <svg id="menu-icon-open" class="w-6 h-6 absolute inset-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- Exit / Close X Icon (Hidden by default, shown when menu is active) -->
+          <svg id="menu-icon-closed" class="w-6 h-6 absolute inset-0 transition-transform duration-300 opacity-0 scale-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
     </div>
@@ -75,19 +115,31 @@
       <a href="{% url 'catalog:contact' %}" class="block py-1 hover:text-gold">Contact</a>
       <a href="{% url 'wishlist:wishlist' %}" class="block py-1 hover:text-gold">Wishlist</a>
       <a href="{% url 'cart:cart_detail' %}" class="block py-1 hover:text-gold">Cart{% if nav_cart and nav_cart.item_count %} ({{ nav_cart.item_count }}){% endif %}</a>
-      {% if user.is_authenticated %}
-      {% if user.is_staff %}<a href="{% url 'store_settings:dashboard' %}" class="block py-1 hover:text-gold">Dashboard</a>{% endif %}
       
-      <a href="{% url 'accounts:profile' %}" class="block py-1 hover:text-gold flex items-center gap-2">
-        <svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-        </svg>
-        <span>Profile Account</span>
-      </a>
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}<a href="{% url 'store_settings:dashboard' %}" class="block py-1 hover:text-gold">Dashboard</a>{% endif %}
+        
+        <a href="{% url 'accounts:profile' %}" class="block py-1 hover:text-gold flex items-center gap-2">
+          <svg class="w-4 h-4 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+          <span>Profile Account</span>
+        </a>
 
-      <a href="{% url 'accounts:logout' %}" class="block py-1 text-white/50 hover:text-gold transition">Logout</a>
+        <!-- Mobile Logout Form -->
+        <form action="{% url 'accounts:logout' %}" method="post" class="mt-2 pt-2 border-t border-white/10">
+          {% csrf_token %}
+          <button type="submit" class="w-full text-left text-red-400 hover:text-red-300 py-1 flex items-center gap-2 font-medium bg-transparent border-none cursor-pointer">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Logout</span>
+          </button>
+        </form>
       {% else %}
-      <a href="{% url 'accounts:login' %}" class="block py-1 hover:text-gold">Login</a>
+        <a href="{% url 'accounts:login' %}" class="block py-1 hover:text-gold">Login</a>
       {% endif %}
     </div>
   </div>
@@ -124,19 +176,25 @@
 
 <script>
   function toggleMobileMenu() {
-    var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementById('mobile-menu-btn');
-    var isOpen = menu.classList.contains('max-h-0') === false;
-    if (isOpen) {
-      menu.classList.add('max-h-0', 'opacity-0');
-      menu.classList.remove('max-h-[28rem]', 'opacity-100');
-      btn.setAttribute('aria-expanded', 'false');
+    const menu = document.getElementById('mobile-menu');
+    const menuOpenIcon = document.getElementById('menu-icon-open');
+    const menuClosedIcon = document.getElementById('menu-icon-closed');
+    const isExpanded = menu.style.maxHeight && menu.style.maxHeight !== '0px';
+
+    if (isExpanded) {
+        menu.style.maxHeight = '0px';
+        menu.style.opacity = '0';
+        // Switch back to hamburger icon
+        menuOpenIcon.classList.remove('opacity-0', 'scale-75');
+        menuClosedIcon.classList.add('opacity-0', 'scale-75');
     } else {
-      menu.classList.remove('max-h-0', 'opacity-0');
-      menu.classList.add('max-h-[28rem]', 'opacity-100');
-      btn.setAttribute('aria-expanded', 'true');
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+        menu.style.opacity = '1';
+        // Switch to 'X' exit icon
+        menuOpenIcon.classList.add('opacity-0', 'scale-75');
+        menuClosedIcon.classList.remove('opacity-0', 'scale-75');
     }
-  }
+}
 
   function openSearchModal() {
     document.getElementById('search-modal').classList.remove('hidden');
